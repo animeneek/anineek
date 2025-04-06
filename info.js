@@ -19,18 +19,18 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("animeRating").textContent = `Rating: ${anime.rating || "N/A"}`;
             document.getElementById("animeGenre").textContent = `Genre: ${anime.genres.map(genre => genre.name).join(", ") || "N/A"}`;
             document.getElementById("animeThemes").textContent = `Theme: ${anime.themes.map(theme => theme.name).join(", ") || "N/A"}`;
-            document.getElementById("animeDemographic").textContent = `Demographic: ${anime.demographics.map(demographic => demographic.name).join(", ") || "N/A"}`;
+            document.getElementById("animeDemographic").textContent = `Demographic: ${anime.demographics.map(d => d.name).join(", ") || "N/A"}`;
             document.getElementById("animeSynopsis").textContent = anime.synopsis || "N/A";
 
             document.getElementById("animeType").textContent = anime.type || "N/A";
             document.getElementById("animeEpisodes").textContent = anime.episodes || "Unknown";
             document.getElementById("animeStatus").textContent = anime.status || "N/A";
             document.getElementById("animeAired").textContent = anime.aired.string || "N/A";
-            document.getElementById("animePremiered").textContent = anime.premiered || "N/A";
+            document.getElementById("animePremiered").textContent = anime.season && anime.year ? `${anime.season} ${anime.year}` : "N/A";
             document.getElementById("animeDuration").textContent = anime.duration || "N/A";
             document.getElementById("animeScore").textContent = anime.score || "N/A";
-            document.getElementById("animeStudio").textContent = anime.studios.map(studio => studio.name).join(", ") || "N/A";
-            document.getElementById("animeProducers").textContent = anime.producers.map(producer => producer.name).join(", ") || "N/A";
+            document.getElementById("animeStudio").textContent = anime.studios.map(s => s.name).join(", ") || "N/A";
+            document.getElementById("animeProducers").textContent = anime.producers.map(p => p.name).join(", ") || "N/A";
 
             // Load episode data from animeneek.json
             fetch("animeneek.json")
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     console.error("Error fetching episode data:", error);
                 });
 
-            // Fetch related entries
+            // Load related entries
             fetchRelatedEntries(anime);
         })
         .catch(error => {
@@ -106,21 +106,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function fetchRelatedEntries(anime) {
         const relatedEntriesList = document.getElementById("relatedEntriesList");
-        const relatedTypes = ["Prequel", "Sequel", "Side story", "Spin-off", "Adaptation", "Summary", "Alternative version", "Other"];
+        relatedEntriesList.innerHTML = ""; // Clear previous content
 
-        relatedEntriesList.innerHTML = ""; // Clear any existing entries
+        if (!anime.relations || anime.relations.length === 0) {
+            relatedEntriesList.innerHTML = "<p>No related entries found.</p>";
+            return;
+        }
 
-        relatedTypes.forEach(type => {
-            if (anime.relations && anime.relations.length > 0) {
-                anime.relations.forEach(relation => {
-                    if (relation.type === type) {
-                        relation.entry.forEach(entry => {
-                            const listItem = document.createElement("li");
-                            listItem.textContent = `${relation.type}: ${entry.name}`;
-                            relatedEntriesList.appendChild(listItem);
-                        });
-                    }
+        anime.relations.forEach(relation => {
+            if (relation.entry.length > 0) {
+                const relationType = document.createElement("div");
+                relationType.classList.add("related-group");
+
+                const relationTitle = document.createElement("h4");
+                relationTitle.textContent = `${relation.type}:`;
+                relationType.appendChild(relationTitle);
+
+                const entryList = document.createElement("ul");
+
+                relation.entry.forEach(entry => {
+                    const listItem = document.createElement("li");
+                    const link = document.createElement("a");
+                    link.textContent = entry.name;
+                    link.href = `info.html?id=${entry.mal_id}`;
+                    link.target = "_blank";
+                    listItem.appendChild(link);
+                    entryList.appendChild(listItem);
                 });
+
+                relationType.appendChild(entryList);
+                relatedEntriesList.appendChild(relationType);
             }
         });
     }
