@@ -320,6 +320,66 @@ main {
 }
 
 /* Related Entries Section */
+
+/* Related Entries Table */
+#relatedEntriesTable {
+    width: 48%; /* Adjusted width for right alignment */
+    margin-top: 20px;
+    padding: 20px;
+    background: #222;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    float: right; /* Align to the right */
+}
+
+#relatedEntriesTable th, #relatedEntriesTable td {
+    padding: 15px; /* Increased padding for better readability */
+    border: 1px solid #444;
+}
+
+#relatedEntriesTable th {
+    background: #333;
+    text-align: left;
+    width: 200px; /* Fixed width for table headers */
+}
+
+#relatedEntriesTable td {
+    width: calc(100% - 200px); /* Adjust width for table data */
+}
+
+/*added by me
+#relatedEntriesTable ul {
+    padding-left: 1em;
+    margin-top: 0.3em;
+}
+
+.related-group {
+    margin-bottom: 1em;
+}
+
+.related-group h4 {
+    margin: 0 0 0.3em;
+    color: #fff; /* Adjust as needed */
+    font-weight: 600;
+}
+
+#relatedEntriesTable li {
+    list-style: disc;
+    margin-left: 1em;
+    color: #ccc;
+}
+
+#relatedEntriesTable a {
+    color: #80c0ff;
+    text-decoration: none;
+}
+
+#relatedEntriesTable a:hover {
+    text-decoration: underline;
+}
+
+/*new
 #relatedEntries {
     margin-top: 20px;
     background: #222;
