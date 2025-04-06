@@ -105,38 +105,48 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function fetchRelatedEntries(anime) {
-        const relatedEntriesList = document.getElementById("relatedEntriesList");
-        relatedEntriesList.innerHTML = ""; // Clear previous content
+    const relatedEntriesList = document.getElementById("relatedEntriesList");
+    relatedEntriesList.innerHTML = "";
 
-        if (!anime.relations || anime.relations.length === 0) {
-            relatedEntriesList.innerHTML = "<p>No related entries found.</p>";
-            return;
-        }
-
-        anime.relations.forEach(relation => {
-            if (relation.entry.length > 0) {
-                const relationType = document.createElement("div");
-                relationType.classList.add("related-group");
-
-                const relationTitle = document.createElement("h4");
-                relationTitle.textContent = `${relation.type}:`;
-                relationType.appendChild(relationTitle);
-
-                const entryList = document.createElement("ul");
-
-                relation.entry.forEach(entry => {
-                    const listItem = document.createElement("li");
-                    const link = document.createElement("a");
-                    link.textContent = entry.name;
-                    link.href = `info.html?id=${entry.mal_id}`;
-                    link.target = "_blank";
-                    listItem.appendChild(link);
-                    entryList.appendChild(listItem);
-                });
-
-                relationType.appendChild(entryList);
-                relatedEntriesList.appendChild(relationType);
+    // Check if relations are available
+    fetch(`https://api.jikan.moe/v4/anime/${anime.mal_id}/relations`)
+        .then(res => res.json())
+        .then(data => {
+            if (!data.data || data.data.length === 0) {
+                relatedEntriesList.innerHTML = "<p>No related entries found.</p>";
+                return;
             }
+
+            data.data.forEach(relation => {
+                if (relation.entry.length > 0) {
+                    const relationType = document.createElement("div");
+                    relationType.classList.add("related-group");
+
+                    const relationTitle = document.createElement("h4");
+                    relationTitle.textContent = `${relation.relation}:`;
+                    relationType.appendChild(relationTitle);
+
+                    const entryList = document.createElement("ul");
+
+                    relation.entry.forEach(entry => {
+                        const listItem = document.createElement("li");
+                        const link = document.createElement("a");
+                        link.textContent = entry.name;
+                        link.href = `info.html?id=${entry.mal_id}`;
+                        link.target = "_blank";
+                        listItem.appendChild(link);
+                        entryList.appendChild(listItem);
+                    });
+
+                    relationType.appendChild(entryList);
+                    relatedEntriesList.appendChild(relationType);
+                }
+            });
+        })
+        .catch(err => {
+            console.error("Failed to load related anime:", err);
+            relatedEntriesList.innerHTML = "<p>Unable to fetch related entries.</p>";
         });
-    }
+}
+
 });
