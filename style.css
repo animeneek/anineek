@@ -153,7 +153,7 @@ main {
 }
 
 .anime-title {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     color: #fff;
     margin: 10px 0;
@@ -164,7 +164,7 @@ main {
 }
 
 .anime-details {
-    font-size: 12px;
+    font-size: 10px;
     color: #aaa;
     margin: 10px 0;
     display: flex;
@@ -326,7 +326,7 @@ main {
 #animeDetailsTable th {
     background: #333;
     text-align: left;
-    width: 200px; /* Fixed width for table headers */
+    width: 30%; /* Fixed width for table headers */
 }
 
 #animeDetailsTable td {
@@ -355,7 +355,7 @@ main {
 #relatedEntriesTable th {
     background: #333;
     text-align: left;
-    width: 200px; /* Fixed width for table headers */
+    width: 30%; /* Fixed width for table headers */
 }
 
 #relatedEntriesTable td {
@@ -839,6 +839,7 @@ main {
     .anime-item {
         width: 100%;
         height: auto;
+        cursor: pointer;
     }
 
     .poster-container {
