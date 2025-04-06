@@ -731,19 +731,33 @@ main {
 }
 
 /* Anime Tabs Container */
-.anime-tabs-container {
-    margin-top: 20px;
-    background: #222;
-    border-radius: 10px;
-    padding: 20px;
+.animeTabsContainer {
+    width: 100%;  /* Ensure it takes the full width */
+    overflow-x: auto;  /* Allow horizontal scrolling if the content overflows */
+    padding: 0 10px;  /* Optional: Add some padding */
+    box-sizing: border-box;  /* Ensure padding is inside the container width */
 }
 
 .tab-headings {
     display: flex;
-    align-items: center;
-    gap: 10px; /* Add gap between buttons */
+    justify-content: space-evenly;  /* Ensure even spacing between tabs */
+    width: auto;  /* Let the width adjust based on content */
+    min-width: 100%;  /* Make sure the tabs never shrink below 100% width */
 }
 
+.tab-heading {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;  /* Adjust font size for better readability on mobile */
+    white-space: nowrap;  /* Prevent text from wrapping inside tabs */
+    min-width: 120px;  /* Ensure each tab has a minimum width to be readable */
+}
+
+.tab-heading:hover {
+    cursor: pointer;
+    background-color: #333;  /* Optional: Add a hover effect */
+}
 .tab-button {
     background: #333;
     border: none;
@@ -948,4 +962,40 @@ main {
 .anime-item img, .related-entry img {
     max-width: 100%;
     height: auto; /* Ensure images don’t overflow and maintain aspect ratio */
+}
+
+/* Mobile - Adjust font size for better fit */
+@media (max-width: 768px) {
+    .tab-heading {
+        font-size: 12px;  /* Smaller font size on mobile */
+    }
+
+    .animeTabsContainer {
+        padding: 0 5px;  /* Reduce padding for better spacing */
+    }
+}
+
+/* Allow horizontal scrolling for overflowing tabs on small screens */
+@media (max-width: 768px) {
+    .animeTabsContainer {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;  /* Smooth scrolling on mobile */
+    }
+
+    .tab-headings {
+        flex-wrap: nowrap;  /* Prevent wrapping of tabs */
+    }
+}
+
+/* Stacking tabs vertically on very small screens (e.g., for phones in portrait) */
+@media (max-width: 480px) {
+    .tab-headings {
+        flex-direction: column;  /* Stack tabs vertically */
+        align-items: flex-start;  /* Align to the left */
+    }
+
+    .tab-heading {
+        font-size: 14px;  /* Slightly larger font for better readability */
+        min-width: 100%;  /* Allow full width for each tab */
+    }
 }
