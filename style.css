@@ -795,27 +795,199 @@ main {
     justify-content: flex-start; /* Align items to the left */
 }
 
-/* Media Queries for Responsive Design */
-@media (max-width: 1200px) {
-    .grid-container {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-}
-
-@media (max-width: 992px) {
-    .grid-container {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    }
-}
-
+/* Enhanced Media Queries for Better Mobile Support */
 @media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .search-container {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    #logo {
+        height: 30px;
+    }
+
+    main {
+        margin-top: 120px;
+    }
+
     .grid-container {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .anime-item {
+        width: 100%;
+        height: auto;
+    }
+
+    .poster-container {
+        height: 180px;
+    }
+
+    #animePortrait {
+        width: 120px;
+        height: 180px;
+        margin-bottom: 10px;
+    }
+
+    #animeInfo {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    #animeDetails {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    #animeDetailsTable, #relatedEntriesTable {
+        float: none;
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .clearfix::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    #relatedEntriesList {
+        justify-content: center;
+    }
+
+    .related-entry {
+        width: 45%;
+        height: auto;
+    }
+
+    .related-entry .poster-container {
+        height: 180px;
+    }
+
+    #subDubRawSections {
+        flex-direction: column;
+    }
+
+    .sectionContainer {
+        margin: 10px 0;
+    }
+
+    .episodeButtons {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+
+    #player-container iframe {
+        height: 50vh;
+    }
+
+    .slider-container {
+        height: 250px;
+    }
+
+    .slide-content {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .slide-content h2 {
+        font-size: 18px;
+    }
+
+    .slide-content p {
+        font-size: 12px;
+    }
+
+    .anime-tabs-container {
+        padding: 10px;
+    }
+
+    .tab-headings {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .tab-button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .pagination {
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .anime-list {
+        justify-content: center;
+    }
+
+    .pagination-button, .pagination-current {
+        font-size: 14px;
+    }
+
+    .button-container {
+        flex-wrap: wrap;
+    }
+
+    .button-container button {
+        flex: 1 1 45%;
+        text-align: center;
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 480px) {
     .grid-container {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+
+    .anime-item, .related-entry {
+        width: 100%;
+    }
+
+    .poster-container {
+        height: 160px;
+    }
+
+    #animePortrait {
+        width: 100px;
+        height: 150px;
+    }
+
+    .slide-content {
+        padding: 8px;
+    }
+
+    .slide-content h2 {
+        font-size: 16px;
+    }
+
+    .slide-content p {
+        font-size: 12px;
+    }
+
+    .episodeButtons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tab-headings {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .tab-button {
+        width: 100%;
     }
 }
+
+/* You can add more media queries for extreme mobile resolutions or tablets if needed */
