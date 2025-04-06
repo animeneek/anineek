@@ -379,7 +379,7 @@ main {
     text-decoration: underline;
 }
 
-/*new
+/*new*/
 #relatedEntries {
     margin-top: 20px;
     background: #222;
@@ -516,42 +516,26 @@ main {
     flex: 1;
     margin: 0 10px;
     padding: 20px;
-    background: #333;
+    background: #222;
     border-radius: 10px;
 }
 
 .sectionTitle {
-    font-size: 20px;
-    color: #fff;
+    font-size: 18px;
     font-weight: bold;
+    color: #fff;
     margin-bottom: 10px;
 }
 
-.sectionList {
-    list-style: none;
+.sectionContent {
+    color: #aaa;
 }
 
-.sectionList li {
-    color: #ccc;
-    margin-bottom: 8px;
-}
-
-.sectionList a {
-    color: #ff4444;
-    text-decoration: none;
-}
-
-.sectionList a:hover {
-    text-decoration: underline;
-}
-
-/* Media Queries for Mobile Responsiveness */
-
-/* For screens 600px or smaller */
-@media (max-width: 600px) {
+/* Responsive Changes */
+@media (max-width: 768px) {
+    /* Mobile view for grid */
     .grid-container {
-        grid-template-columns: 1fr; /* Stack items vertically */
-        padding: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     }
 
     .anime-item {
@@ -560,49 +544,29 @@ main {
     }
 
     #animePortrait {
-        width: 150px;
-        height: 225px;
+        width: 100%;
+        height: auto;
     }
 
+    /* Adjust the layout for the anime details and related entries */
     #animeInfo {
         flex-direction: column;
-        align-items: center;
         text-align: center;
     }
 
     #animeDetailsTable, #relatedEntriesTable {
         width: 100%;
         margin-right: 0;
+        margin-left: 0;
         float: none;
     }
 
-    #searchContainer {
-        width: 100%;
-    }
-}
-
-/* For screens between 601px and 1024px */
-@media (min-width: 601px) and (max-width: 1024px) {
-    .grid-container {
-        grid-template-columns: repeat(2, 1fr); /* Two columns for medium screens */
-    }
-
-    .anime-item {
-        width: 100%;
-        height: auto;
-    }
-
-    #animePortrait {
-        width: 180px;
-        height: 270px;
-    }
-
-    #animeInfo {
+    /* Mobile view for sections */
+    #subDubRawSections {
         flex-direction: column;
-        align-items: center;
     }
 
-    #animeDetailsTable, #relatedEntriesTable {
-        width: 100%;
+    .sectionContainer {
+        margin-bottom: 20px;
     }
 }
