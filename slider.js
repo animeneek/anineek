@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <h2>Score: ${anime.score}</h2>
                             <p>Genres: ${anime.genres.map(g => g.name).join(", ")}</p>
                             <p>${anime.synopsis ? anime.synopsis.substring(0, 100) + '...' : 'No synopsis available.'}</p>
-                            <p class="anime-details">
+                            <p class="anime-details-slider">
                                 <span class="detail-box">${anime.type}</span>
                                 <span class="detail-box">${anime.episodes ? anime.episodes + ' EPS' : '? EPS'}</span>
                                 ${details}
