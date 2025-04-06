@@ -348,7 +348,7 @@ main {
     width: calc(100% - 200px); /* Adjust width for table data */
 }
 
-/*added by me
+/*me*/
 #relatedEntriesTable ul {
     padding-left: 1em;
     margin-top: 0.3em;
@@ -371,7 +371,7 @@ main {
 }
 
 #relatedEntriesTable a {
-    color: #80c0ff;
+    color: #ff4444;
     text-decoration: none;
 }
 
