@@ -490,6 +490,8 @@ main {
     left: 0;
     transition: opacity 1s;
     cursor: pointer; /* Add cursor pointer for hover effect */
+    image-rendering: auto;
+
 }
 
 /* Dark Overlay */
