@@ -1,6 +1,11 @@
 (async function replaceAllMalImagesWithAniList() {
-    // Helper: Get AniList images using MAL ID
     async function fetchAniListImage(malId) {
+        // Check if we have cached data
+        const cachedData = localStorage.getItem(`aniListImages_${malId}`);
+        if (cachedData) {
+            return JSON.parse(cachedData);
+        }
+
         const query = `
             query ($idMal: Int) {
                 Media(idMal: $idMal, type: ANIME) {
@@ -23,10 +28,15 @@
             });
             const data = await res.json();
             const media = data.data.Media;
-            return {
+            const aniImages = {
                 banner: media.bannerImage,
                 cover: media.coverImage.extraLarge || media.coverImage.large || media.coverImage.medium
             };
+            
+            // Cache the result
+            localStorage.setItem(`aniListImages_${malId}`, JSON.stringify(aniImages));
+
+            return aniImages;
         } catch (err) {
             console.warn("AniList fetch failed for MAL ID:", malId);
             return null;
