@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const slide = document.createElement("div");
             slide.classList.add("slide");
-            slide.style.backgroundImage = `url(${anime.images.jpg.large_image_url})`;
+            slide.style.backgroundImage = `url(${anime.images.webp.large_image_url})`;
 
             let hasSub = false, hasDub = false, hasRaw = false;
             if (animeDetails && animeDetails.episodes) {
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
             slide.innerHTML = `
                 <div class="dark-overlay">
                     <div id="animeInfo">
-                        <img id="animePortrait" src="${anime.images.jpg.large_image_url}" alt="${anime.title} Portrait">
+                        <img id="animePortrait" src="${anime.images.webp.large_image_url}" alt="${anime.title} Portrait">
                         <div id="animeDetails">
                             <h1>${anime.title}</h1>
                             <h2>Score: ${anime.score}</h2>
