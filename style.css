@@ -345,7 +345,7 @@ main {
 }
 
 #relatedEntriesTable td {
-    width: calc(100% - 200px); /* Adjust width for table data */
+    width: calc(100%); /* Adjust width for table data */
 }
 
 /*me*/
