@@ -346,6 +346,38 @@ main {
     width: calc(100% - 200px); /* Adjust width for table data */
 }
 
+/*added by me
+#relatedEntriesTable ul {
+    padding-left: 1em;
+    margin-top: 0.3em;
+}
+
+.related-group {
+    margin-bottom: 1em;
+}
+
+.related-group h4 {
+    margin: 0 0 0.3em;
+    color: #fff; /* Adjust as needed */
+    font-weight: 600;
+}
+
+#relatedEntriesTable li {
+    list-style: disc;
+    margin-left: 1em;
+    color: #ccc;
+}
+
+#relatedEntriesTable a {
+    color: #80c0ff;
+    text-decoration: none;
+}
+
+#relatedEntriesTable a:hover {
+    text-decoration: underline;
+}
+
+
 /* Clearfix for floating elements */
 .clearfix::after {
     content: "";
