@@ -42,6 +42,8 @@ header {
 /* Main Content */
 main {
     margin-top: 80px; /* Adjust this value based on your header height */
+    padding: 0 20px;  /* Add padding to prevent content from touching edges */
+
 }
 
 /* Search Title Styling */
@@ -796,26 +798,154 @@ main {
 }
 
 /* Media Queries for Responsive Design */
-@media (max-width: 1200px) {
-    .grid-container {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-}
-
-@media (max-width: 992px) {
-    .grid-container {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    }
-}
-
+/* Mobile View */
 @media (max-width: 768px) {
+    /* Header */
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    /* Logo */
+    #logo {
+        height: 35px; /* Slightly smaller logo */
+    }
+
+    /* Search Box */
+    .search-container {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* Grid Items */
     .grid-container {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Adjust grid items for mobile */
+        gap: 10px;  /* Reduce gap for mobile */
+    }
+
+    .anime-item {
+        width: 100%;  /* Ensure items take up full width */
+        height: auto;  /* Let height scale based on content */
+    }
+
+    /* Slider Container */
+    .slider-container {
+        height: 250px;  /* Decrease height for smaller screens */
+    }
+
+    /* Anime Item Text */
+    .anime-title {
+        font-size: 12px; /* Adjust font size for better readability */
+    }
+
+    /* Related Entries */
+    #relatedEntriesTable, #animeDetailsTable {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .related-entry {
+        width: 100%;
+        height: auto; /* Let height scale */
+    }
+
+    /* Adjust the layout for sub, dub, raw sections */
+    #subDubRawSections {
+        flex-direction: column; /* Stack sections vertically */
+    }
+
+    .sectionContainer {
+        margin-bottom: 10px; /* Add margin between sections */
+    }
+
+    /* Pagination */
+    #pagination {
+        padding: 0 10px; /* Add padding */
+    }
+
+    /* Modify Button Sizes */
+    .button-container button {
+        padding: 8px 15px;  /* Reduce padding for smaller screens */
+    }
+
+    /* Player Container */
+    #player-container iframe {
+        height: 60vh;  /* Adjust iframe height for mobile */
     }
 }
 
-@media (max-width: 576px) {
+/* Tablet View */
+@media (max-width: 1024px) {
     .grid-container {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Slightly bigger grid items */
     }
+
+    .anime-item {
+        width: 100%;
+        height: auto;
+    }
+
+    .slider-container {
+        height: 350px;  /* Adjust slider height for tablet screens */
+    }
+}
+
+/* Mobile Navigation Menu */
+@media (max-width: 768px) {
+    /* Hide the default navigation */
+    nav ul {
+        display: none;
+    }
+
+    /* Hamburger Button */
+    #menuButton {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 30px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    /* When hamburger menu is clicked */
+    nav.active ul {
+        display: block;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #222;
+        padding: 20px;
+        text-align: center;
+    }
+
+    nav.active ul li {
+        margin: 10px 0;
+    }
+}
+
+/* Padding and margin adjustments */
+@media (max-width: 768px) {
+    .anime-item, .related-entry {
+        margin: 5px;  /* Reduce margins */
+    }
+
+    .poster-container {
+        padding: 0;  /* Remove extra padding */
+    }
+
+    /* Adjust title font size */
+    .anime-title {
+        font-size: 12px;
+    }
+
+    .anime-details {
+        font-size: 10px;
+    }
+}
+
+.anime-item img, .related-entry img {
+    max-width: 100%;
+    height: auto; /* Ensure images don’t overflow and maintain aspect ratio */
 }
