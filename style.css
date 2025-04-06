@@ -1007,3 +1007,36 @@ main {
 }
 
 /* You can add more media queries for extreme mobile resolutions or tablets if needed */
+/* Add the following styles at the end of your existing style.css */
+
+/* Filter Container Styling */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Dropdown Styling */
+.filter-container select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background: #333;
+    color: #fff;
+}
+
+/* Apply Filters Button Styling */
+.filter-container button {
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: none;
+    background: #ff4444;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.filter-container button:hover {
+    background: #ff2222;
+}
