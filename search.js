@@ -99,3 +99,43 @@ document.addEventListener("DOMContentLoaded", function () {
             animeResults.innerHTML = "<p>Failed to load search results. Please try again later.</p>";
         });
 });
+
+// Add the following function to your existing search.js
+
+function applyFilters() {
+    const genreFilter = document.getElementById('genreFilter').value;
+    const tagFilter = document.getElementById('tagFilter').value;
+    const yearFilter = document.getElementById('yearFilter').value;
+    const statusFilter = document.getElementById('statusFilter').value;
+    const typeFilter = document.getElementById('typeFilter').value;
+
+    // Fetch and display the filtered results
+    // Implement your filtering logic here
+
+    // Example: Fetch data from your API with filters
+    fetch(`your-api-endpoint?genre=${genreFilter}&tag=${tagFilter}&year=${yearFilter}&status=${statusFilter}&type=${typeFilter}`)
+        .then(response => response.json())
+        .then(data => {
+            // Display the filtered results
+            const animeResults = document.getElementById('animeResults');
+            animeResults.innerHTML = ''; // Clear previous results
+            data.forEach(anime => {
+                // Create and append anime item elements
+                const animeItem = document.createElement('div');
+                animeItem.classList.add('anime-item');
+                animeItem.innerHTML = `
+                    <div class="poster-container">
+                        <img src="${anime.poster}" alt="${anime.title}" class="anime-poster">
+                    </div>
+                    <div class="anime-title">${anime.title}</div>
+                    <div class="anime-details">
+                        <span class="detail-box">${anime.genre}</span>
+                        <span class="detail-box">${anime.year}</span>
+                        <span class="detail-box">${anime.status}</span>
+                        <span class="detail-box">${anime.type}</span>
+                    </div>
+                `;
+                animeResults.appendChild(animeItem);
+            });
+        });
+}
