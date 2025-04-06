@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="poster-container">
                     <img class="anime-poster" src="${anime.images.jpg.large_image_url}" alt="${anime.title}" data-mal-id="${anime.mal_id}">
                     <div class="overlay">
-                        <div class="fa-solid fa-play">&#9654;</div>
+                        <div class="play-button"><i class="fa-solid fa-play"></i></div>
                     </div>
                 </div>
                 <div class="anime-title">${anime.title}</div>
