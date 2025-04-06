@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         animeItem.innerHTML = `
                             <a href="info.html?id=${anime.mal_id}">
                                 <div class="poster-container">
-                                    <img src="${anime.images.jpg.image_url}" alt="${anime.title}" class="anime-poster">
+                                    <img src="${anime.images.jpg.image_url}" alt="${anime.title}" class="anime-poster" data-mal-id="${anime.mal_id}">
                                     <div class="overlay"></div>
                                     <div class="play-button"><i class="fa-solid fa-play"></i></div>
                                 </div>
