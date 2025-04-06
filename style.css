@@ -42,8 +42,6 @@ header {
 /* Main Content */
 main {
     margin-top: 80px; /* Adjust this value based on your header height */
-    padding: 0 20px;  /* Add padding to prevent content from touching edges */
-
 }
 
 /* Search Title Styling */
@@ -731,33 +729,19 @@ main {
 }
 
 /* Anime Tabs Container */
-.animeTabsContainer {
-    width: 100%;  /* Ensure it takes the full width */
-    overflow-x: auto;  /* Allow horizontal scrolling if the content overflows */
-    padding: 0 10px;  /* Optional: Add some padding */
-    box-sizing: border-box;  /* Ensure padding is inside the container width */
+.anime-tabs-container {
+    margin-top: 20px;
+    background: #222;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 .tab-headings {
     display: flex;
-    justify-content: space-evenly;  /* Ensure even spacing between tabs */
-    width: auto;  /* Let the width adjust based on content */
-    min-width: 100%;  /* Make sure the tabs never shrink below 100% width */
+    align-items: center;
+    gap: 10px; /* Add gap between buttons */
 }
 
-.tab-heading {
-    flex: 1;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 14px;  /* Adjust font size for better readability on mobile */
-    white-space: nowrap;  /* Prevent text from wrapping inside tabs */
-    min-width: 120px;  /* Ensure each tab has a minimum width to be readable */
-}
-
-.tab-heading:hover {
-    cursor: pointer;
-    background-color: #333;  /* Optional: Add a hover effect */
-}
 .tab-button {
     background: #333;
     border: none;
@@ -812,190 +796,26 @@ main {
 }
 
 /* Media Queries for Responsive Design */
-/* Mobile View */
-@media (max-width: 768px) {
-    /* Header */
-    header {
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
-    }
-
-    /* Logo */
-    #logo {
-        height: 35px; /* Slightly smaller logo */
-    }
-
-    /* Search Box */
-    .search-container {
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    /* Grid Items */
+@media (max-width: 1200px) {
     .grid-container {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Adjust grid items for mobile */
-        gap: 10px;  /* Reduce gap for mobile */
-    }
-
-    .anime-item {
-        width: 100%;  /* Ensure items take up full width */
-        height: auto;  /* Let height scale based on content */
-    }
-
-    /* Slider Container */
-    .slider-container {
-        height: 250px;  /* Decrease height for smaller screens */
-    }
-
-    /* Anime Item Text */
-    .anime-title {
-        font-size: 12px; /* Adjust font size for better readability */
-    }
-
-    /* Related Entries */
-    #relatedEntriesTable, #animeDetailsTable {
-        width: 100%;
-        margin-right: 0;
-    }
-
-    .related-entry {
-        width: 100%;
-        height: auto; /* Let height scale */
-    }
-
-    /* Adjust the layout for sub, dub, raw sections */
-    #subDubRawSections {
-        flex-direction: column; /* Stack sections vertically */
-    }
-
-    .sectionContainer {
-        margin-bottom: 10px; /* Add margin between sections */
-    }
-
-    /* Pagination */
-    #pagination {
-        padding: 0 10px; /* Add padding */
-    }
-
-    /* Modify Button Sizes */
-    .button-container button {
-        padding: 8px 15px;  /* Reduce padding for smaller screens */
-    }
-
-    /* Player Container */
-    #player-container iframe {
-        height: 60vh;  /* Adjust iframe height for mobile */
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 }
 
-/* Tablet View */
-@media (max-width: 1024px) {
+@media (max-width: 992px) {
     .grid-container {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Slightly bigger grid items */
-    }
-
-    .anime-item {
-        width: 100%;
-        height: auto;
-    }
-
-    .slider-container {
-        height: 350px;  /* Adjust slider height for tablet screens */
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     }
 }
 
-/* Mobile Navigation Menu */
 @media (max-width: 768px) {
-    /* Hide the default navigation */
-    nav ul {
-        display: none;
-    }
-
-    /* Hamburger Button */
-    #menuButton {
-        display: block;
-        background: none;
-        border: none;
-        font-size: 30px;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    /* When hamburger menu is clicked */
-    nav.active ul {
-        display: block;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background: #222;
-        padding: 20px;
-        text-align: center;
-    }
-
-    nav.active ul li {
-        margin: 10px 0;
+    .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 }
 
-/* Padding and margin adjustments */
-@media (max-width: 768px) {
-    .anime-item, .related-entry {
-        margin: 5px;  /* Reduce margins */
-    }
-
-    .poster-container {
-        padding: 0;  /* Remove extra padding */
-    }
-
-    /* Adjust title font size */
-    .anime-title {
-        font-size: 12px;
-    }
-
-    .anime-details {
-        font-size: 10px;
-    }
-}
-
-.anime-item img, .related-entry img {
-    max-width: 100%;
-    height: auto; /* Ensure images don’t overflow and maintain aspect ratio */
-}
-
-/* Mobile - Adjust font size for better fit */
-@media (max-width: 768px) {
-    .tab-heading {
-        font-size: 12px;  /* Smaller font size on mobile */
-    }
-
-    .animeTabsContainer {
-        padding: 0 5px;  /* Reduce padding for better spacing */
-    }
-}
-
-/* Allow horizontal scrolling for overflowing tabs on small screens */
-@media (max-width: 768px) {
-    .animeTabsContainer {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;  /* Smooth scrolling on mobile */
-    }
-
-    .tab-headings {
-        flex-wrap: nowrap;  /* Prevent wrapping of tabs */
-    }
-}
-
-/* Stacking tabs vertically on very small screens (e.g., for phones in portrait) */
-@media (max-width: 480px) {
-    .tab-headings {
-        flex-direction: column;  /* Stack tabs vertically */
-        align-items: flex-start;  /* Align to the left */
-    }
-
-    .tab-heading {
-        font-size: 14px;  /* Slightly larger font for better readability */
-        min-width: 100%;  /* Allow full width for each tab */
+@media (max-width: 576px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
 }
