@@ -1013,9 +1013,10 @@ main {
 /* Filter Container */
 .filter-container {
     display: flex;
-    flex-direction: column; /* Stacks dropdowns vertically */
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 10px;
+    justify-content: center;
 }
 
 .filter-container select,
@@ -1039,4 +1040,12 @@ main {
 
 .filter-container button:hover {
     background: #444;
+}
+
+/* Adjust search-container to align with filters */
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
