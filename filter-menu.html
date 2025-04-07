@@ -26,7 +26,6 @@
             border-radius: 5px;
             margin: 5px;
             width: 180px; /* Adjust width if needed */
-            height: 120px; /* Adjust height if needed */
         }
 
         .clear-filters-button {
@@ -44,12 +43,15 @@
             background: #ff2222;
         }
     </style>
+
+    <!-- Include Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
 
 <div class="filter-menu">
     <!-- Genres -->
-    <select class="filter-dropdown" multiple>
+    <select class="filter-dropdown" id="genres" multiple="multiple">
         <option disabled>Genres</option>
         <option>Action</option>
         <option>Adventure</option>
@@ -71,7 +73,7 @@
     </select>
 
     <!-- Themes -->
-    <select class="filter-dropdown" multiple>
+    <select class="filter-dropdown" id="themes" multiple="multiple">
         <option disabled>Themes</option>
         <option>Anthropomorphic</option>
         <option>CGDCT</option>
@@ -125,7 +127,7 @@
     </select>
 
     <!-- Demographics -->
-    <select class="filter-dropdown" multiple>
+    <select class="filter-dropdown" id="demographics" multiple="multiple">
         <option disabled>Demographics</option>
         <option>Shounen</option>
         <option>Shoujo</option>
@@ -135,7 +137,7 @@
     </select>
 
     <!-- Anime Seasons -->
-    <select class="filter-dropdown" multiple>
+    <select class="filter-dropdown" id="seasons" multiple="multiple">
         <option disabled>Anime Seasons</option>
         <option>Winter</option>
         <option>Spring</option>
@@ -144,7 +146,7 @@
     </select>
 
     <!-- Type -->
-    <select class="filter-dropdown" multiple>
+    <select class="filter-dropdown" id="types" multiple="multiple">
         <option disabled>Type</option>
         <option>TV</option>
         <option>OVA</option>
@@ -155,7 +157,7 @@
     </select>
 
     <!-- Status -->
-    <select class="filter-dropdown" multiple>
+    <select class="filter-dropdown" id="status" multiple="multiple">
         <option disabled>Status</option>
         <option>Currently Airing</option>
         <option>Finished Airing</option>
@@ -166,12 +168,21 @@
     <button class="clear-filters-button" onclick="clearFilters()">Clear Filters</button>
 </div>
 
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-    function clearFilters() {
-        const dropdowns = document.querySelectorAll('.filter-dropdown');
-        dropdowns.forEach(dropdown => {
-            dropdown.selectedIndex = -1; // Deselect all options
+    // Initialize Select2 for all filter dropdowns
+    $(document).ready(function() {
+        $('.filter-dropdown').select2({
+            placeholder: "Select options",
+            allowClear: true
         });
+    });
+
+    function clearFilters() {
+        $('.filter-dropdown').val(null).trigger('change');
     }
 </script>
 
