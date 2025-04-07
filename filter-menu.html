@@ -1,7 +1,5 @@
 <div id="filterMenu" class="filter-menu" style="background-color: #222; padding: 10px; border: 1px solid black;">
-    <select class="filter-dropdown" id="filter1">
-        <option value="">Select Genre</option>
-    </select>
+    <select class="filter-dropdown" id="filter1"></select>
     <select class="filter-dropdown" id="filter2"></select>
     <select class="filter-dropdown" id="filter3"></select>
     <select class="filter-dropdown" id="filter4"></select>
@@ -11,69 +9,52 @@
 </div>
 
 <script>
-    // List of genres as per MyAnimeList, including explicit genres, with IDs
     const genres = [
-        { value: "1", text: "Action" },
-        { value: "2", text: "Adventure" },
-        { value: "3", text: "Cars" },
-        { value: "4", text: "Comedy" },
-        { value: "5", text: "Dementia" },
-        { value: "6", text: "Demons" },
-        { value: "7", text: "Mystery" },
-        { value: "8", text: "Drama" },
-        { value: "9", text: "Ecchi" },
-        { value: "10", text: "Fantasy" },
-        { value: "11", text: "Game" },
-        { value: "12", text: "Hentai" },
-        { value: "13", text: "Historical" },
-        { value: "14", text: "Horror" },
-        { value: "15", text: "Kids" },
-        { value: "16", text: "Magic" },
-        { value: "17", text: "Martial Arts" },
-        { value: "18", text: "Mecha" },
-        { value: "19", text: "Music" },
-        { value: "20", text: "Parody" },
-        { value: "21", text: "Samurai" },
-        { value: "22", text: "Romance" },
-        { value: "23", text: "School" },
-        { value: "24", text: "Sci-Fi" },
-        { value: "25", text: "Shoujo" },
-        { value: "26", text: "Shoujo Ai" },
-        { value: "27", text: "Shounen" },
-        { value: "28", text: "Shounen Ai" },
-        { value: "29", text: "Space" },
-        { value: "30", text: "Sports" },
-        { value: "31", text: "Super Power" },
-        { value: "32", text: "Vampire" },
-        { value: "33", text: "Yaoi" },
-        { value: "34", text: "Yuri" },
-        { value: "35", text: "Harem" },
-        { value: "36", text: "Slice of Life" },
-        { value: "37", text: "Supernatural" },
-        { value: "38", text: "Military" },
-        { value: "39", text: "Police" },
-        { value: "40", text: "Psychological" },
-        { value: "41", text: "Thriller" },
-        { value: "42", text: "Seinen" },
+        { value: "1", text: "Action" }, { value: "2", text: "Adventure" },
+        { value: "3", text: "Cars" }, { value: "4", text: "Comedy" },
+        { value: "5", text: "Dementia" }, { value: "6", text: "Demons" },
+        { value: "7", text: "Mystery" }, { value: "8", text: "Drama" },
+        { value: "9", text: "Ecchi" }, { value: "10", text: "Fantasy" },
+        { value: "11", text: "Game" }, { value: "12", text: "Hentai" },
+        { value: "13", text: "Historical" }, { value: "14", text: "Horror" },
+        { value: "15", text: "Kids" }, { value: "16", text: "Magic" },
+        { value: "17", text: "Martial Arts" }, { value: "18", text: "Mecha" },
+        { value: "19", text: "Music" }, { value: "20", text: "Parody" },
+        { value: "21", text: "Samurai" }, { value: "22", text: "Romance" },
+        { value: "23", text: "School" }, { value: "24", text: "Sci-Fi" },
+        { value: "25", text: "Shoujo" }, { value: "26", text: "Shoujo Ai" },
+        { value: "27", text: "Shounen" }, { value: "28", text: "Shounen Ai" },
+        { value: "29", text: "Space" }, { value: "30", text: "Sports" },
+        { value: "31", text: "Super Power" }, { value: "32", text: "Vampire" },
+        { value: "33", text: "Yaoi" }, { value: "34", text: "Yuri" },
+        { value: "35", text: "Harem" }, { value: "36", text: "Slice of Life" },
+        { value: "37", text: "Supernatural" }, { value: "38", text: "Military" },
+        { value: "39", text: "Police" }, { value: "40", text: "Psychological" },
+        { value: "41", text: "Thriller" }, { value: "42", text: "Seinen" },
         { value: "43", text: "Josei" }
     ];
 
-    // Function to populate the first dropdown with genres
-    function populateGenres() {
-        const filter1 = document.getElementById("filter1");
-        if (filter1) {
-            console.log('Populating genres...');
-            genres.forEach(genre => {
-                const option = document.createElement("option");
-                option.value = genre.value;
-                option.text = genre.text;
-                filter1.add(option);
-            });
-        } else {
-            console.error('Filter dropdown not found!');
-        }
+    function populateDropdown(dropdown) {
+        dropdown.innerHTML = ""; // Clear existing options
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.text = "Select Genre";
+        dropdown.add(defaultOption);
+
+        genres.forEach(genre => {
+            const option = document.createElement("option");
+            option.value = genre.value;
+            option.text = genre.text;
+            dropdown.add(option);
+        });
     }
 
-    // Call the function to populate genres when the page loads
-    document.addEventListener("DOMContentLoaded", populateGenres);
+    document.addEventListener("DOMContentLoaded", () => {
+        for (let i = 1; i <= 6; i++) {
+            const dropdown = document.getElementById(`filter${i}`);
+            if (dropdown) {
+                populateDropdown(dropdown);
+            }
+        }
+    });
 </script>
