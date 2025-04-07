@@ -31,31 +31,13 @@
         }
 
         .filter-dropdown select {
-            display: none; /* Hide the default select box */
-        }
-
-        .filter-dropdown-content {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #333;
-            color: white;
-            width: 100%;
-            padding: 5px;
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
             border-radius: 5px;
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 999;
-        }
-
-        .filter-dropdown-content label {
-            display: block;
-            padding: 5px;
+            width: 100%;
             cursor: pointer;
-        }
-
-        .filter-dropdown-content label:hover {
-            background-color: #444;
         }
 
         .clear-filters-button {
@@ -80,76 +62,81 @@
     <!-- Genres -->
     <div class="filter-dropdown" id="genres">
         <span>Select Genres</span>
-        <div class="filter-dropdown-content" id="genres-dropdown">
-            <!-- These values should ideally be fetched from MyAnimeList API -->
-            <label><input type="checkbox" value="Action"> Action</label>
-            <label><input type="checkbox" value="Adventure"> Adventure</label>
-            <label><input type="checkbox" value="Comedy"> Comedy</label>
-            <label><input type="checkbox" value="Drama"> Drama</label>
-            <label><input type="checkbox" value="Fantasy"> Fantasy</label>
-            <label><input type="checkbox" value="Horror"> Horror</label>
-            <label><input type="checkbox" value="Romance"> Romance</label>
-        </div>
+        <select id="genres-select">
+            <option value="">Select Genre</option>
+            <option value="Action">Action</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Horror">Horror</option>
+            <option value="Romance">Romance</option>
+        </select>
     </div>
 
     <!-- Themes -->
     <div class="filter-dropdown" id="themes">
         <span>Select Themes</span>
-        <div class="filter-dropdown-content" id="themes-dropdown">
-            <label><input type="checkbox" value="Anthropomorphic"> Anthropomorphic</label>
-            <label><input type="checkbox" value="Combat Sports"> Combat Sports</label>
-            <label><input type="checkbox" value="Detective"> Detective</label>
-            <label><input type="checkbox" value="Gore"> Gore</label>
-            <label><input type="checkbox" value="Harem"> Harem</label>
-            <label><input type="checkbox" value="Isekai"> Isekai</label>
-            <label><input type="checkbox" value="Psychological"> Psychological</label>
-        </div>
+        <select id="themes-select">
+            <option value="">Select Theme</option>
+            <option value="Anthropomorphic">Anthropomorphic</option>
+            <option value="Combat Sports">Combat Sports</option>
+            <option value="Detective">Detective</option>
+            <option value="Gore">Gore</option>
+            <option value="Harem">Harem</option>
+            <option value="Isekai">Isekai</option>
+            <option value="Psychological">Psychological</option>
+        </select>
     </div>
 
     <!-- Demographics -->
     <div class="filter-dropdown" id="demographics">
         <span>Select Demographics</span>
-        <div class="filter-dropdown-content" id="demographics-dropdown">
-            <label><input type="checkbox" value="Shounen"> Shounen</label>
-            <label><input type="checkbox" value="Shoujo"> Shoujo</label>
-            <label><input type="checkbox" value="Seinen"> Seinen</label>
-            <label><input type="checkbox" value="Josei"> Josei</label>
-            <label><input type="checkbox" value="Kodomo"> Kodomo</label>
-        </div>
+        <select id="demographics-select">
+            <option value="">Select Demographic</option>
+            <option value="Shounen">Shounen</option>
+            <option value="Shoujo">Shoujo</option>
+            <option value="Seinen">Seinen</option>
+            <option value="Josei">Josei</option>
+            <option value="Kodomo">Kodomo</option>
+        </select>
     </div>
 
     <!-- Anime Seasons -->
     <div class="filter-dropdown" id="seasons">
         <span>Select Anime Seasons</span>
-        <div class="filter-dropdown-content" id="seasons-dropdown">
-            <label><input type="checkbox" value="Winter"> Winter</label>
-            <label><input type="checkbox" value="Spring"> Spring</label>
-            <label><input type="checkbox" value="Summer"> Summer</label>
-            <label><input type="checkbox" value="Fall"> Fall</label>
-        </div>
+        <select id="seasons-select">
+            <option value="">Select Season</option>
+            <option value="Winter">Winter</option>
+            <option value="Spring">Spring</option>
+            <option value="Summer">Summer</option>
+            <option value="Fall">Fall</option>
+        </select>
     </div>
 
     <!-- Type -->
     <div class="filter-dropdown" id="types">
         <span>Select Type</span>
-        <div class="filter-dropdown-content" id="types-dropdown">
-            <label><input type="checkbox" value="TV"> TV</label>
-            <label><input type="checkbox" value="OVA"> OVA</label>
-            <label><input type="checkbox" value="ONA"> ONA</label>
-            <label><input type="checkbox" value="Movie"> Movie</label>
-            <label><input type="checkbox" value="Special"> Special</label>
-            <label><input type="checkbox" value="Music"> Music</label>
-        </div>
+        <select id="types-select">
+            <option value="">Select Type</option>
+            <option value="TV">TV</option>
+            <option value="OVA">OVA</option>
+            <option value="ONA">ONA</option>
+            <option value="Movie">Movie</option>
+            <option value="Special">Special</option>
+            <option value="Music">Music</option>
+        </select>
     </div>
 
     <!-- Status -->
     <div class="filter-dropdown" id="status">
         <span>Select Status</span>
-        <div class="filter-dropdown-content" id="status-dropdown">
-            <label><input type="checkbox" value="Currently Airing"> Currently Airing</label>
-            <label><input type="checkbox" value="Finished Airing"> Finished Airing</label>
-            <label><input type="checkbox" value="Not yet aired"> Not yet aired</label>
-        </div>
+        <select id="status-select">
+            <option value="">Select Status</option>
+            <option value="Currently Airing">Currently Airing</option>
+            <option value="Finished Airing">Finished Airing</option>
+            <option value="Not yet aired">Not yet aired</option>
+        </select>
     </div>
 
     <!-- Clear Filters Button -->
@@ -157,32 +144,13 @@
 </div>
 
 <script>
-    // Function to toggle the dropdown content visibility
-    const filterDropdowns = document.querySelectorAll('.filter-dropdown');
-    filterDropdowns.forEach(dropdown => {
-        dropdown.addEventListener('click', function(event) {
-            const content = dropdown.querySelector('.filter-dropdown-content');
-            content.style.display = content.style.display === 'block' ? 'none' : 'block';
-            event.stopPropagation(); // Prevent event propagation to body
-        });
-    });
-
-    // Function to clear all filters (checkbox selections)
+    // Function to clear all filters (dropdown selections)
     function clearFilters() {
-        const checkboxes = document.querySelectorAll('.filter-dropdown-content input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = false;
+        const selects = document.querySelectorAll('.filter-dropdown select');
+        selects.forEach(select => {
+            select.selectedIndex = 0;  // Reset to first option (placeholder)
         });
     }
-
-    // Close dropdowns if clicked outside
-    document.addEventListener('click', function(event) {
-        if (!event.target.closest('.filter-dropdown')) {
-            document.querySelectorAll('.filter-dropdown-content').forEach(content => {
-                content.style.display = 'none';
-            });
-        }
-    });
 </script>
 
 </body>
