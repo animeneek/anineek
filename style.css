@@ -1008,6 +1008,8 @@ main {
 
 /* You can add more media queries for extreme mobile resolutions or tablets if needed */
 
+/* Add this to the existing CSS */
+
 /* Filter Container */
 .filter-container {
     display: flex;
