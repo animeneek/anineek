@@ -1,3 +1,8 @@
+document.addEventListener("DOMContentLoaded", function () {
+    initializeSearchAndRandom();
+    initializeFilters();
+});
+
 function initializeSearchAndRandom() {
     const searchButton = document.getElementById("searchButton");
     const randomButton = document.getElementById("randomButton");
@@ -7,6 +12,9 @@ function initializeSearchAndRandom() {
         const query = searchBox.value;
         if (query) {
             window.location.href = `search.html?q=${query}`;
+        } else {
+            // Fetch and display all anime by popularity
+            fetchAllAnime();
         }
     });
 
@@ -18,9 +26,6 @@ function initializeSearchAndRandom() {
             }
         });
     });
-
-    // Initialize filters
-    initializeFilters();
 }
 
 function initializeFilters() {
@@ -57,8 +62,8 @@ function filterResults() {
     const selectedTypes = Array.from(document.getElementById("types").selectedOptions).map(option => option.value);
     const selectedStatus = Array.from(document.getElementById("status").selectedOptions).map(option => option.value);
 
-    // Implement filtering logic based on selected values
-    // Update the displayed results accordingly
+    // Fetch and filter results based on selected values
+    fetchFilteredAnime(selectedGenres, selectedThemes, selectedDemographics, selectedSeasons, selectedTypes, selectedStatus);
 }
 
 function clearFilters() {
@@ -66,7 +71,7 @@ function clearFilters() {
     dropdowns.forEach(dropdown => {
         dropdown.selectedIndex = 0; // Reset to default
     });
-    // Optionally fetch and display all results again
+    fetchAllAnime(); // Optionally fetch and display all results again
 }
 
 // Functions to fetch dropdown options from MyAnimeList API
@@ -92,4 +97,12 @@ function fetchTypes(dropdown) {
 
 function fetchStatus(dropdown) {
     // Fetch status from MyAnimeList API and populate dropdown
+}
+
+function fetchAllAnime() {
+    // Fetch and display all anime by popularity
+}
+
+function fetchFilteredAnime(genres, themes, demographics, seasons, types, status) {
+    // Fetch and display filtered anime based on the selected criteria
 }
