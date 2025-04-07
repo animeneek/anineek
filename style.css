@@ -1007,3 +1007,34 @@ main {
 }
 
 /* You can add more media queries for extreme mobile resolutions or tablets if needed */
+
+/* Filter Container */
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.filter-container select,
+.filter-container button {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background: #333;
+    color: #fff;
+    font-size: 14px;
+}
+
+.filter-container select[multiple] {
+    height: auto;
+}
+
+.filter-container button {
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.filter-container button:hover {
+    background: #444;
+}
