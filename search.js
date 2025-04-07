@@ -2,6 +2,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get("q");
     const page = parseInt(urlParams.get("page")) || 1;
+    const genre = urlParams.get("genre");
+    const theme = urlParams.get("theme");
+    const demographic = urlParams.get("demographic");
+    const year = urlParams.get("year");
+    const type = urlParams.get("type");
+    const status = urlParams.get("status");
     const animeResults = document.getElementById("animeResults");
     const pagination = document.getElementById("pagination");
     const searchTitle = document.getElementById("searchTitle");
@@ -14,7 +20,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     searchTitle.innerText = `Results for: ${query}`;
 
-    fetch(`https://api.jikan.moe/v4/anime?q=${query}&page=${page}&limit=${RESULTS_PER_PAGE}`)
+    let apiUrl = `https://api.jikan.moe/v4/anime?q=${query}&page=${page}&limit=${RESULTS_PER_PAGE}`;
+    if (genre) apiUrl += `&genres=${genre}`;
+    if (theme) apiUrl += `&themes=${theme}`;
+    if (demographic) apiUrl += `&demographics=${demographic}`;
+    if (year) apiUrl += `&year=${year}`;
+    if (type) apiUrl += `&type=${type}`;
+    if (status) apiUrl += `&status=${status}`;
+
+    fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
             animeResults.innerHTML = "";
