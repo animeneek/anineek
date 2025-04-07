@@ -1,8 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-    initializeSearchAndRandom();
-    initializeFilters();
-});
-
 function initializeSearchAndRandom() {
     const searchButton = document.getElementById("searchButton");
     const randomButton = document.getElementById("randomButton");
@@ -12,8 +7,6 @@ function initializeSearchAndRandom() {
         const query = searchBox.value;
         if (query) {
             window.location.href = `search.html?q=${query}`;
-        } else {
-            fetchAllAnime();
         }
     });
 
@@ -25,57 +18,34 @@ function initializeSearchAndRandom() {
             }
         });
     });
-}
 
-function initializeFilters() {
-    const dropdowns = {
-        genres: document.getElementById("genres"),
-        themes: document.getElementById("themes"),
-        demographics: document.getElementById("demographics"),
-        seasons: document.getElementById("seasons"),
-        types: document.getElementById("types"),
-        status: document.getElementById("status")
-    };
-
-    // Fetch and populate dropdowns
-    fetchGenres(dropdowns.genres);
-    fetchThemes(dropdowns.themes);
-    fetchDemographics(dropdowns.demographics);
-    fetchSeasons(dropdowns.seasons);
-    fetchTypes(dropdowns.types);
-    fetchStatus(dropdowns.status);
-
-    // Add event listeners for filtering
-    Object.values(dropdowns).forEach(dropdown => {
-        dropdown.addEventListener("change", () => filterResults());
+    searchBox.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            const query = searchBox.value;
+            if (query) {
+                window.location.href = `search.html?q=${query}`;
+            }
+        }
     });
-
-    document.getElementById("clearFilters").addEventListener("click", clearFilters);
 }
 
-// Example function to fetch genres
-function fetchGenres(dropdown) {
-    fetch('https://api.jikan.moe/v4/genres/anime')
+function fetchPopularAnime() {
+    return fetch("https://api.jikan.moe/v4/top/anime")
         .then(response => response.json())
+        .then(data => data.data)
+        .catch(error => {
+            console.error("Error fetching popular anime:", error);
+            return [];
+        });
+}
+
+// Ensure the function is called on all pages where the header is loaded
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("header.html")
+        .then(response => response.text())
         .then(data => {
-            data.data.forEach(genre => {
-                const option = document.createElement("option");
-                option.value = genre.mal_id;
-                option.textContent = genre.name;
-                dropdown.appendChild(option);
-            });
-        })
-        .catch(error => console.error('Error fetching genres:', error));
-}
-
-// Implement similar fetch functions for themes, demographics, seasons, types, and status
-
-function clearFilters() {
-    const dropdowns = document.querySelectorAll("#filters select");
-    dropdowns.forEach(dropdown => {
-        dropdown.selectedIndex = 0; // Reset to default
-    });
-    fetchAllAnime(); // Optionally fetch and display all results again
-}
-
-// Implement the fetchAllAnime and fetchFilteredAnime functions as needed
+            document.getElementById("header").innerHTML = data;
+            // Initialize search and random functionality after loading the header
+            initializeSearchAndRandom();
+        });
+});

@@ -2,12 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get("q");
     const page = parseInt(urlParams.get("page")) || 1;
-    const genres = urlParams.get("genres") ? urlParams.get("genres").split(",") : [];
-    const themes = urlParams.get("themes") ? urlParams.get("themes").split(",") : [];
-    const demographics = urlParams.get("demographics") ? urlParams.get("demographics").split(",") : [];
-    const seasons = urlParams.get("seasons") ? urlParams.get("seasons").split(",") : [];
-    const types = urlParams.get("types") ? urlParams.get("types").split(",") : [];
-    const statuses = urlParams.get("statuses") ? urlParams.get("statuses").split(",") : [];
     const animeResults = document.getElementById("animeResults");
     const pagination = document.getElementById("pagination");
     const searchTitle = document.getElementById("searchTitle");
@@ -20,17 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     searchTitle.innerText = `Results for: ${query}`;
 
-    let apiURL = `https://api.jikan.moe/v4/anime?q=${query}&page=${page}&limit=${RESULTS_PER_PAGE}`;
-
-    // Append filters to API URL
-    if (genres.length) apiURL += `&genres=${genres.join(",")}`;
-    if (themes.length) apiURL += `&themes=${themes.join(",")}`;
-    if (demographics.length) apiURL += `&demographics=${demographics.join(",")}`;
-    if (seasons.length) apiURL += `&seasons=${seasons.join(",")}`;
-    if (types.length) apiURL += `&types=${types.join(",")}`;
-    if (statuses.length) apiURL += `&statuses=${statuses.join(",")}`;
-
-    fetch(apiURL)
+    fetch(`https://api.jikan.moe/v4/anime?q=${query}&page=${page}&limit=${RESULTS_PER_PAGE}`)
         .then(response => response.json())
         .then(data => {
             animeResults.innerHTML = "";
