@@ -61,12 +61,17 @@
     // Function to populate the first dropdown with genres
     function populateGenres() {
         const filter1 = document.getElementById("filter1");
-        genres.forEach(genre => {
-            const option = document.createElement("option");
-            option.value = genre.value;
-            option.text = genre.text;
-            filter1.add(option);
-        });
+        if (filter1) {
+            console.log('Populating genres...');
+            genres.forEach(genre => {
+                const option = document.createElement("option");
+                option.value = genre.value;
+                option.text = genre.text;
+                filter1.add(option);
+            });
+        } else {
+            console.error('Filter dropdown not found!');
+        }
     }
 
     // Call the function to populate genres when the page loads
