@@ -25,6 +25,8 @@
             padding: 5px 10px;
             border-radius: 5px;
             margin: 5px;
+            width: 180px; /* Adjust width if needed */
+            height: 120px; /* Adjust height if needed */
         }
 
         .clear-filters-button {
@@ -47,8 +49,8 @@
 
 <div class="filter-menu">
     <!-- Genres -->
-    <select class="filter-dropdown">
-        <option disabled selected>Genres</option>
+    <select class="filter-dropdown" multiple>
+        <option disabled>Genres</option>
         <option>Action</option>
         <option>Adventure</option>
         <option>Avant Garde</option>
@@ -69,8 +71,8 @@
     </select>
 
     <!-- Themes -->
-    <select class="filter-dropdown">
-        <option disabled selected>Themes</option>
+    <select class="filter-dropdown" multiple>
+        <option disabled>Themes</option>
         <option>Anthropomorphic</option>
         <option>CGDCT</option>
         <option>Childcare</option>
@@ -123,8 +125,8 @@
     </select>
 
     <!-- Demographics -->
-    <select class="filter-dropdown">
-        <option disabled selected>Demographics</option>
+    <select class="filter-dropdown" multiple>
+        <option disabled>Demographics</option>
         <option>Shounen</option>
         <option>Shoujo</option>
         <option>Seinen</option>
@@ -133,8 +135,8 @@
     </select>
 
     <!-- Anime Seasons -->
-    <select class="filter-dropdown">
-        <option disabled selected>Anime Seasons</option>
+    <select class="filter-dropdown" multiple>
+        <option disabled>Anime Seasons</option>
         <option>Winter</option>
         <option>Spring</option>
         <option>Summer</option>
@@ -142,8 +144,8 @@
     </select>
 
     <!-- Type -->
-    <select class="filter-dropdown">
-        <option disabled selected>Type</option>
+    <select class="filter-dropdown" multiple>
+        <option disabled>Type</option>
         <option>TV</option>
         <option>OVA</option>
         <option>ONA</option>
@@ -153,8 +155,8 @@
     </select>
 
     <!-- Status -->
-    <select class="filter-dropdown">
-        <option disabled selected>Status</option>
+    <select class="filter-dropdown" multiple>
+        <option disabled>Status</option>
         <option>Currently Airing</option>
         <option>Finished Airing</option>
         <option>Not yet aired</option>
@@ -168,7 +170,7 @@
     function clearFilters() {
         const dropdowns = document.querySelectorAll('.filter-dropdown');
         dropdowns.forEach(dropdown => {
-            dropdown.selectedIndex = 0;
+            dropdown.selectedIndex = -1; // Deselect all options
         });
     }
 </script>
