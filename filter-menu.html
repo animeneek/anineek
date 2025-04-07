@@ -25,7 +25,7 @@
             padding: 5px 10px;
             border-radius: 5px;
             margin: 5px;
-            width: 180px; /* Adjust width if needed */
+            max-width: 200px;
         }
 
         .clear-filters-button {
@@ -43,91 +43,38 @@
             background: #ff2222;
         }
     </style>
-
-    <!-- Include Select2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
 
 <div class="filter-menu">
     <!-- Genres -->
-    <select class="filter-dropdown" id="genres" multiple="multiple">
+    <select class="filter-dropdown" multiple>
         <option disabled>Genres</option>
+        <!-- These values should ideally be fetched from MyAnimeList API -->
         <option>Action</option>
         <option>Adventure</option>
-        <option>Avant Garde</option>
         <option>Comedy</option>
         <option>Drama</option>
         <option>Fantasy</option>
         <option>Horror</option>
-        <option>Mystery</option>
         <option>Romance</option>
-        <option>Sci-Fi</option>
-        <option>Slice of Life</option>
-        <option>Sports</option>
-        <option>Supernatural</option>
-        <!-- Explicit genres -->
-        <option>Ecchi</option>
-        <option>Hentai</option>
-        <option>Erotica</option>
     </select>
 
     <!-- Themes -->
-    <select class="filter-dropdown" id="themes" multiple="multiple">
+    <select class="filter-dropdown" multiple>
         <option disabled>Themes</option>
+        <!-- These values should ideally be fetched from MyAnimeList API -->
         <option>Anthropomorphic</option>
-        <option>CGDCT</option>
-        <option>Childcare</option>
         <option>Combat Sports</option>
-        <option>Crossdressing</option>
-        <option>Delinquents</option>
         <option>Detective</option>
-        <option>Gag Humor</option>
         <option>Gore</option>
         <option>Harem</option>
-        <option>High Stakes Game</option>
-        <option>Historical</option>
-        <option>Idols (Female)</option>
-        <option>Idols (Male)</option>
         <option>Isekai</option>
-        <option>Iyashikei</option>
-        <option>Love Polygon</option>
-        <option>Magical Sex Shift</option>
-        <option>Mahou Shoujo</option>
-        <option>Martial Arts</option>
-        <option>Mecha</option>
-        <option>Medical</option>
-        <option>Military</option>
-        <option>Music</option>
-        <option>Mythology</option>
-        <option>Organized Crime</option>
-        <option>Otaku Culture</option>
-        <option>Parody</option>
-        <option>Performing Arts</option>
-        <option>Pirates</option>
         <option>Psychological</option>
-        <option>Racing</option>
-        <option>Reincarnation</option>
-        <option>Reverse Harem</option>
-        <option>Romantic Subtext</option>
-        <option>Samurai</option>
-        <option>School</option>
-        <option>Showbiz</option>
-        <option>Space</option>
-        <option>Strategy Game</option>
-        <option>Super Power</option>
-        <option>Survival</option>
-        <option>Team Sports</option>
-        <option>Time Travel</option>
-        <option>Vampire</option>
-        <option>Video Game</option>
-        <option>Villainess</option>
-        <option>Visual Arts</option>
-        <option>Workplace</option>
     </select>
 
     <!-- Demographics -->
-    <select class="filter-dropdown" id="demographics" multiple="multiple">
+    <select class="filter-dropdown" multiple>
         <option disabled>Demographics</option>
         <option>Shounen</option>
         <option>Shoujo</option>
@@ -137,7 +84,7 @@
     </select>
 
     <!-- Anime Seasons -->
-    <select class="filter-dropdown" id="seasons" multiple="multiple">
+    <select class="filter-dropdown" multiple>
         <option disabled>Anime Seasons</option>
         <option>Winter</option>
         <option>Spring</option>
@@ -146,7 +93,7 @@
     </select>
 
     <!-- Type -->
-    <select class="filter-dropdown" id="types" multiple="multiple">
+    <select class="filter-dropdown" multiple>
         <option disabled>Type</option>
         <option>TV</option>
         <option>OVA</option>
@@ -157,7 +104,7 @@
     </select>
 
     <!-- Status -->
-    <select class="filter-dropdown" id="status" multiple="multiple">
+    <select class="filter-dropdown" multiple>
         <option disabled>Status</option>
         <option>Currently Airing</option>
         <option>Finished Airing</option>
@@ -168,22 +115,47 @@
     <button class="clear-filters-button" onclick="clearFilters()">Clear Filters</button>
 </div>
 
-<!-- Include jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Include Select2 JS -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-    // Initialize Select2 for all filter dropdowns
-    $(document).ready(function() {
-        $('.filter-dropdown').select2({
-            placeholder: "Select options",
-            allowClear: true
+    // Fetching data from MyAnimeList (or an API) for genres, themes, demographics, etc. (example with static data)
+
+    // Placeholder function for fetching data from an API (MyAnimeList or another source)
+    function fetchFilterData() {
+        // Sample data; ideally you'd fetch this from an API endpoint
+        const genres = ["Action", "Adventure", "Comedy", "Drama", "Fantasy", "Horror", "Romance"];
+        const themes = ["Anthropomorphic", "Combat Sports", "Detective", "Gore", "Harem", "Isekai", "Psychological"];
+        const demographics = ["Shounen", "Shoujo", "Seinen", "Josei", "Kodomo"];
+        const seasons = ["Winter", "Spring", "Summer", "Fall"];
+        const types = ["TV", "OVA", "ONA", "Movie", "Special", "Music"];
+        const statuses = ["Currently Airing", "Finished Airing", "Not yet aired"];
+
+        // Populate the dropdowns with these values dynamically
+        populateDropdown('genres', genres);
+        populateDropdown('themes', themes);
+        populateDropdown('demographics', demographics);
+        populateDropdown('seasons', seasons);
+        populateDropdown('types', types);
+        populateDropdown('statuses', statuses);
+    }
+
+    function populateDropdown(id, values) {
+        const dropdown = document.getElementById(id);
+        values.forEach(value => {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = value;
+            dropdown.appendChild(option);
         });
-    });
+    }
 
     function clearFilters() {
-        $('.filter-dropdown').val(null).trigger('change');
+        const dropdowns = document.querySelectorAll('.filter-dropdown');
+        dropdowns.forEach(dropdown => {
+            dropdown.selectedIndex = -1;  // Clear selection for multi-select
+        });
     }
+
+    // Initialize filter data fetching
+    fetchFilterData();
 </script>
 
 </body>
