@@ -25,7 +25,7 @@ function initializeSearchAndRandom() {
     });
 
     document.getElementById("applyFilterButton").addEventListener("click", () => {
-        const query = searchBox.value;
+        const query = searchBox.value || ""; // Ensure query is not null
         applyFiltersAndSearch(query);
     });
 }
