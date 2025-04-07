@@ -5,18 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filter Menu</title>
     <style>
-        /* Add necessary styles here */
         .filter-menu {
             display: flex;
             flex-direction: column;
             margin: 10px 0;
-            margin-top: 65px; /* Added margin-top */
+            margin-top: 65px;
+            padding: 20px;
+            background: #222;
+            border-radius: 10px;
+        }
+        .filter-menu h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #fff;
         }
         .filter-menu label {
             margin-right: 10px;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #fff;
         }
         .filter-menu button {
             margin-top: 10px;
+            padding: 10px;
+            background: #ff4444;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .filter-menu button:hover {
+            background: #ff6666;
         }
     </style>
 </head>
@@ -65,7 +85,6 @@
         }
 
         async function searchAnime() {
-            // Add your search logic here
             const query = ''; // Replace with actual search query
             const selectedGenres = getSelectedGenres();
             const url = `https://api.jikan.moe/v4/anime?q=${query}&genres=${selectedGenres.join(',')}&limit=25&page=1`;
