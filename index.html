@@ -13,6 +13,9 @@
     <!-- Include Header -->
     <div id="header"></div>
 
+    <!-- Include Filter Menu -->
+    <div id="filterMenuContainer"></div>
+
     <!-- Slider Container -->
     <div id="sliderContainer" class="slider-container">
         <div id="slider" class="slider"></div>
@@ -45,6 +48,12 @@
                 document.getElementById("header").innerHTML = data;
                 // Initialize search and random functionality after loading the header
                 initializeSearchAndRandom();
+            });
+
+        fetch("filter-menu.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("filterMenuContainer").innerHTML = data;
             });
     </script>
 
