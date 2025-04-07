@@ -1,115 +1,115 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const query = urlParams.get("q") || ""; // Ensure query is not null
-    const page = parseInt(urlParams.get("page")) || 1;
-    const genre = urlParams.get("genre");
-    const theme = urlParams.get("theme");
-    const demographic = urlParams.get("demographic");
-    const year = urlParams.get("year");
-    const type = urlParams.get("type");
-    const status = urlParams.get("status");
-    const animeResults = document.getElementById("animeResults");
-    const pagination = document.getElementById("pagination");
-    const searchTitle = document.getElementById("searchTitle");
-    const RESULTS_PER_PAGE = 25;
+    const slider = document.getElementById("slider");
+    const prevSlideButton = document.getElementById("prevSlide");
+    const nextSlideButton = document.getElementById("nextSlide");
+    const sliderDotsContainer = document.getElementById("sliderDots");
+    let currentSlideIndex = 0;
 
-    if (!query && !genre && !theme && !demographic && !year && !type && !status) {
-        animeResults.innerHTML = "<p>No search query provided.</p>";
-        return;
+    async function fetchPopularAnime() {
+        const response = await fetch("https://api.jikan.moe/v4/top/anime");
+        const data = await response.json();
+        return data.data.slice(0, 5); // Get the top 5 popular anime
     }
 
-    searchTitle.innerText = `Results for: ${query}`;
+    async function fetchAnimeDetails(id) {
+        const response = await fetch(`https://raw.githubusercontent.com/animeneek/anineek/main/animeneek.json`);
+        const data = await response.json();
+        return data.find(anime => anime["data-mal-id"] === id);
+    }
 
-    let apiUrl = `https://api.jikan.moe/v4/anime?q=${query}&page=${page}&limit=${RESULTS_PER_PAGE}`;
-    if (genre) apiUrl += `&genres=${genre}`;
-    if (theme) apiUrl += `&themes=${theme}`;
-    if (demographic) apiUrl += `&demographics=${demographic}`;
-    if (year) apiUrl += `&year=${year}`;
-    if (type) apiUrl += `&type=${type}`;
-    if (status) apiUrl += `&status=${status}`;
+    async function createSlider() {
+        const popularAnimes = await fetchPopularAnime();
+        const animeDetailsPromises = popularAnimes.map(anime => fetchAnimeDetails(anime.mal_id));
+        const animeDetailsList = await Promise.all(animeDetailsPromises);
 
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            animeResults.innerHTML = "";
-            if (data.data.length === 0) {
-                animeResults.innerHTML = "<p>No results found.</p>";
-                return;
+        popularAnimes.forEach((anime, i) => {
+            const animeDetails = animeDetailsList[i];
+
+            const slide = document.createElement("div");
+            slide.classList.add("slide");
+            slide.setAttribute("data-mal-id", anime.mal_id); // 👈 Add this
+            slide.style.backgroundImage = `url(${anime.images.webp.large_image_url})`;
+
+            let hasSub = false, hasDub = false, hasRaw = false;
+            if (animeDetails && animeDetails.episodes) {
+                hasSub = animeDetails.episodes.some(ep => ep["data-ep-lan"] === "Sub");
+                hasDub = animeDetails.episodes.some(ep => ep["data-ep-lan"] === "Dub");
+                hasRaw = animeDetails.episodes.some(ep => ep["data-ep-lan"] === "Raw");
             }
-            fetch("animeneek.json")
-                .then(response => response.json())
-                .then(animeData => {
-                    data.data.forEach(anime => {
-                        const episodes = anime.episodes !== null ? `${anime.episodes} EPS` : "? EPS";
-                        const status = anime.status === "Finished Airing" ? "Fin" : anime.status === "Currently Airing" ? "Airing" : "Soon";
-                        const hentai = anime.type === "Hentai" ? `<span class="detail-box hen">HEN</span>` : "";
-                        const sources = animeData.find(item => item["data-mal-id"] == anime.mal_id)?.episodes || [];
-                        const sub = sources.some(ep => ep["data-ep-lan"].toLowerCase() === "sub") ? `<span class="detail-box sub">SUB</span>` : "";
-                        const dub = sources.some(ep => ep["data-ep-lan"].toLowerCase() === "dub") ? `<span class="detail-box dub">DUB</span>` : "";
-                        const raw = sources.some(ep => ep["data-ep-lan"].toLowerCase() === "raw") ? `<span class="detail-box raw">RAW</span>` : "";
 
-                        const animeItem = document.createElement("div");
-                        animeItem.className = "anime-item";
-                        animeItem.innerHTML = `
-                            <a href="info.html?id=${anime.mal_id}">
-                                <div class="poster-container">
-                                    <img src="${anime.images.jpg.image_url}" alt="${anime.title}" class="anime-poster" data-mal-id="${anime.mal_id}">
-                                    <div class="overlay"></div>
-                                    <div class="play-button"><i class="fa-solid fa-play"></i></div>
-                                </div>
-                            </a>
-                            <div class="anime-title">${anime.title}</div>
-                            <div class="anime-details">
-                                ${hentai}
+            const details = `
+                ${hasSub ? '<span class="detail-box sub">SUB</span>' : ''}
+                ${hasDub ? '<span class="detail-box dub">DUB</span>' : ''}
+                ${hasRaw ? '<span class="detail-box raw">RAW</span>' : ''}
+            `;
+
+            slide.innerHTML = `
+                <div class="dark-overlay">
+                    <div id="animeInfo">
+                        <img id="animePortrait" src="${anime.images.webp.large_image_url}" alt="${anime.title} Portrait" data-mal-id="${anime.mal_id}">
+                        <div id="animeDetails">
+                            <h1>${anime.title}</h1>
+                            <h2>Score: ${anime.score}</h2>
+                            <p>Genres: ${anime.genres.map(g => g.name).join(", ")}</p>
+                            <p>${anime.synopsis ? anime.synopsis.substring(0, 100) + '...' : 'No synopsis available.'}</p>
+                            <p class="anime-details-slider">
                                 <span class="detail-box">${anime.type}</span>
-                                <span class="detail-box">${episodes}</span>
-                                ${sub}
-                                ${dub}
-                                ${raw}
-                                <span class="detail-box">${status}</span>
-                            </div>
-                        `;
-                        animeResults.appendChild(animeItem);
-                    });
+                                <span class="detail-box">${anime.episodes ? anime.episodes + ' EPS' : '? EPS'}</span>
+                                ${details}
+                                <span class="detail-box">${anime.status === "Finished Airing" ? 'Fin' : anime.status}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            slide.addEventListener("click", () => {
+                window.location.href = `info.html?id=${anime.mal_id}`;
+            });
 
-                    // Pagination
-                    const totalResults = data.pagination.items.total;
-                    const totalPages = Math.ceil(totalResults / RESULTS_PER_PAGE);
-                    pagination.innerHTML = "";
-                    if (page > 1) {
-                        const prevLink = document.createElement("a");
-                        prevLink.href = `search.html?q=${query}&page=${page - 1}`;
-                        prevLink.className = "pagination-link";
-                        prevLink.textContent = "<";
-                        pagination.appendChild(prevLink);
-                    }
-                    for (let i = page - 2; i <= page + 2; i++) {
-                        if (i > 0 && i <= totalPages) {
-                            const pageLink = document.createElement("a");
-                            pageLink.href = `search.html?q=${query}&page=${i}`;
-                            pageLink.className = "pagination-link";
-                            pageLink.textContent = i;
-                            if (i === page) {
-                                pageLink.style.backgroundColor = "#555";
-                            }
-                            pagination.appendChild(pageLink);
-                        }
-                    }
-                    if (page < totalPages) {
-                        const nextLink = document.createElement("a");
-                        nextLink.href = `search.html?q=${query}&page=${page + 1}`;
-                        nextLink.className = "pagination-link";
-                        nextLink.textContent = ">";
-                        pagination.appendChild(nextLink);
-                    }
-                })
-                .catch(error => {
-                    console.error("Error fetching animeneek.json:", error);
-                    animeResults.innerHTML = "<p>Failed to load sources. Please try again later.</p>";
-                });
-        })
-        .catch(error => {
-            console.error("Error fetching search results:", error);
-            animeResults.innerHTML = "<p>Failed to load search results. Please try again later.</p>";
+            slider.appendChild(slide);
+
+            const dot = document.createElement("span");
+            dot.classList.add("slider-dot");
+            dot.addEventListener("click", () => {
+                showSlide(i);
+            });
+            sliderDotsContainer.appendChild(dot);
         });
+        showSlide(currentSlideIndex);
+    }
+
+    function showSlide(index) {
+        const slides = document.getElementsByClassName("slide");
+        const dots = document.getElementsByClassName("slider-dot");
+        if (slides.length === 0) return;
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+            dots[i].classList.remove("active");
+        }
+        if (slides[index]) {
+            slides[index].style.display = "block";
+            dots[index].classList.add("active");
+        }
+    }
+
+    function nextSlide() {
+        const slides = document.getElementsByClassName("slide");
+        if (slides.length === 0) return;
+        currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+        showSlide(currentSlideIndex);
+    }
+
+    function prevSlide() {
+        const slides = document.getElementsByClassName("slide");
+        if (slides.length === 0) return;
+        currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+        showSlide(currentSlideIndex);
+    }
+
+    prevSlideButton.addEventListener("click", prevSlide);
+    nextSlideButton.addEventListener("click", nextSlide);
+
+    setInterval(nextSlide, 5000); // Auto slide every 5 seconds
+
+    createSlider();
 });
