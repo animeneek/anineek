@@ -9,22 +9,27 @@
         .filter-menu {
             display: flex;
             flex-wrap: wrap;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
             background: #222;
             padding: 10px 20px;
             border-radius: 5px;
-            margin-top: 80px; /* Adjust this value if needed */
-            z-index: 999; /* Ensure it stays on top */
+            margin-top: 80px;
+            z-index: 999;
+            gap: 10px;
         }
 
         .filter-dropdown {
             background: #333;
             color: #fff;
             border: 1px solid #444;
-            padding: 5px 10px;
+            padding: 5px;
             border-radius: 5px;
-            margin: 5px;
+            min-width: 160px;
+        }
+
+        .filter-dropdown option {
+            padding: 5px;
         }
 
         .clear-filters-button {
@@ -35,7 +40,6 @@
             cursor: pointer;
             border-radius: 5px;
             transition: background 0.3s;
-            margin: 5px;
         }
 
         .clear-filters-button:hover {
@@ -47,8 +51,8 @@
 
 <div class="filter-menu">
     <!-- Genres -->
-    <select class="filter-dropdown">
-        <option disabled selected>Genres</option>
+    <select class="filter-dropdown" multiple size="8">
+        <option disabled>Genres</option>
         <option>Action</option>
         <option>Adventure</option>
         <option>Avant Garde</option>
@@ -69,8 +73,8 @@
     </select>
 
     <!-- Themes -->
-    <select class="filter-dropdown">
-        <option disabled selected>Themes</option>
+    <select class="filter-dropdown" multiple size="8">
+        <option disabled>Themes</option>
         <option>Anthropomorphic</option>
         <option>CGDCT</option>
         <option>Childcare</option>
@@ -123,8 +127,8 @@
     </select>
 
     <!-- Demographics -->
-    <select class="filter-dropdown">
-        <option disabled selected>Demographics</option>
+    <select class="filter-dropdown" multiple size="5">
+        <option disabled>Demographics</option>
         <option>Shounen</option>
         <option>Shoujo</option>
         <option>Seinen</option>
@@ -133,8 +137,8 @@
     </select>
 
     <!-- Anime Seasons -->
-    <select class="filter-dropdown">
-        <option disabled selected>Anime Seasons</option>
+    <select class="filter-dropdown" multiple size="4">
+        <option disabled>Anime Seasons</option>
         <option>Winter</option>
         <option>Spring</option>
         <option>Summer</option>
@@ -142,8 +146,8 @@
     </select>
 
     <!-- Type -->
-    <select class="filter-dropdown">
-        <option disabled selected>Type</option>
+    <select class="filter-dropdown" multiple size="6">
+        <option disabled>Type</option>
         <option>TV</option>
         <option>OVA</option>
         <option>ONA</option>
@@ -153,8 +157,8 @@
     </select>
 
     <!-- Status -->
-    <select class="filter-dropdown">
-        <option disabled selected>Status</option>
+    <select class="filter-dropdown" multiple size="3">
+        <option disabled>Status</option>
         <option>Currently Airing</option>
         <option>Finished Airing</option>
         <option>Not yet aired</option>
@@ -168,7 +172,9 @@
     function clearFilters() {
         const dropdowns = document.querySelectorAll('.filter-dropdown');
         dropdowns.forEach(dropdown => {
-            dropdown.selectedIndex = 0;
+            for (let i = 0; i < dropdown.options.length; i++) {
+                dropdown.options[i].selected = false;
+            }
         });
     }
 </script>
