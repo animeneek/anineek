@@ -13,43 +13,55 @@
     </button>
 
     <!-- Dropdown Filters -->
-    <div id="filters">
+    <div id="filters" class="dropdowns">
         <div class="dropdownContainer">
             <select id="genres" multiple>
-                <option value="">Genres</option>
-                <!-- Populate genres dynamically from API -->
+                <option value="">Select Genres</option>
             </select>
         </div>
         <div class="dropdownContainer">
             <select id="themes" multiple>
-                <option value="">Themes</option>
-                <!-- Populate themes dynamically from API -->
+                <option value="">Select Themes</option>
             </select>
         </div>
         <div class="dropdownContainer">
             <select id="demographics" multiple>
-                <option value="">Demographics</option>
-                <!-- Populate demographics dynamically from API -->
+                <option value="">Select Demographics</option>
             </select>
         </div>
         <div class="dropdownContainer">
             <select id="seasons" multiple>
-                <option value="">Anime Seasons</option>
-                <!-- Populate seasons dynamically from API -->
+                <option value="">Select Seasons</option>
             </select>
         </div>
         <div class="dropdownContainer">
             <select id="types" multiple>
-                <option value="">Type</option>
-                <!-- Populate types dynamically from API -->
+                <option value="">Select Types</option>
             </select>
         </div>
         <div class="dropdownContainer">
             <select id="status" multiple>
-                <option value="">Status</option>
-                <!-- Populate status dynamically from API -->
+                <option value="">Select Status</option>
             </select>
         </div>
         <button id="clearFilters">Clear Filters</button>
     </div>
 </header>
+
+<style>
+    #filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    .dropdownContainer {
+        flex: 1 1 150px; /* Responsive width */
+    }
+    select {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+</style>
