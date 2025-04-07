@@ -1,73 +1,177 @@
-<div id="filterMenu" class="filter-menu" style="background-color: #222; padding: 10px; border: 1px solid black;">
-    <select class="filter-dropdown" id="filter1">
-        <option value="">Select Genre</option>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Anime Filter Menu</title>
+    <style>
+        /* Filter Menu Styling */
+
+        .filter-menu {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            background: #222;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 80px; /* Adjust this value if needed */
+            z-index: 999; /* Ensure it stays on top */
+        }
+
+        .filter-dropdown {
+            background: #333;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        .clear-filters-button {
+            background: #ff4444;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+            margin: 5px;
+        }
+
+        .clear-filters-button:hover {
+            background: #ff2222;
+        }
+    </style>
+</head>
+<body>
+
+<div class="filter-menu">
+    <!-- Genres -->
+    <select class="filter-dropdown">
+        <option disabled selected>Genres</option>
+        <option>Action</option>
+        <option>Adventure</option>
+        <option>Avant Garde</option>
+        <option>Comedy</option>
+        <option>Drama</option>
+        <option>Fantasy</option>
+        <option>Horror</option>
+        <option>Mystery</option>
+        <option>Romance</option>
+        <option>Sci-Fi</option>
+        <option>Slice of Life</option>
+        <option>Sports</option>
+        <option>Supernatural</option>
+        <!-- Explicit genres -->
+        <option>Ecchi</option>
+        <option>Hentai</option>
+        <option>Erotica</option>
     </select>
-    <select class="filter-dropdown" id="filter2"></select>
-    <select class="filter-dropdown" id="filter3"></select>
-    <select class="filter-dropdown" id="filter4"></select>
-    <select class="filter-dropdown" id="filter5"></select>
-    <select class="filter-dropdown" id="filter6"></select>
-    <button id="clearFilters" class="clear-filters-button">Clear Filters</button>
+
+    <!-- Themes -->
+    <select class="filter-dropdown">
+        <option disabled selected>Themes</option>
+        <option>Anthropomorphic</option>
+        <option>CGDCT</option>
+        <option>Childcare</option>
+        <option>Combat Sports</option>
+        <option>Crossdressing</option>
+        <option>Delinquents</option>
+        <option>Detective</option>
+        <option>Gag Humor</option>
+        <option>Gore</option>
+        <option>Harem</option>
+        <option>High Stakes Game</option>
+        <option>Historical</option>
+        <option>Idols (Female)</option>
+        <option>Idols (Male)</option>
+        <option>Isekai</option>
+        <option>Iyashikei</option>
+        <option>Love Polygon</option>
+        <option>Magical Sex Shift</option>
+        <option>Mahou Shoujo</option>
+        <option>Martial Arts</option>
+        <option>Mecha</option>
+        <option>Medical</option>
+        <option>Military</option>
+        <option>Music</option>
+        <option>Mythology</option>
+        <option>Organized Crime</option>
+        <option>Otaku Culture</option>
+        <option>Parody</option>
+        <option>Performing Arts</option>
+        <option>Pirates</option>
+        <option>Psychological</option>
+        <option>Racing</option>
+        <option>Reincarnation</option>
+        <option>Reverse Harem</option>
+        <option>Romantic Subtext</option>
+        <option>Samurai</option>
+        <option>School</option>
+        <option>Showbiz</option>
+        <option>Space</option>
+        <option>Strategy Game</option>
+        <option>Super Power</option>
+        <option>Survival</option>
+        <option>Team Sports</option>
+        <option>Time Travel</option>
+        <option>Vampire</option>
+        <option>Video Game</option>
+        <option>Villainess</option>
+        <option>Visual Arts</option>
+        <option>Workplace</option>
+    </select>
+
+    <!-- Demographics -->
+    <select class="filter-dropdown">
+        <option disabled selected>Demographics</option>
+        <option>Shounen</option>
+        <option>Shoujo</option>
+        <option>Seinen</option>
+        <option>Josei</option>
+        <option>Kodomo</option>
+    </select>
+
+    <!-- Anime Seasons -->
+    <select class="filter-dropdown">
+        <option disabled selected>Anime Seasons</option>
+        <option>Winter</option>
+        <option>Spring</option>
+        <option>Summer</option>
+        <option>Fall</option>
+    </select>
+
+    <!-- Type -->
+    <select class="filter-dropdown">
+        <option disabled selected>Type</option>
+        <option>TV</option>
+        <option>OVA</option>
+        <option>ONA</option>
+        <option>Movie</option>
+        <option>Special</option>
+        <option>Music</option>
+    </select>
+
+    <!-- Status -->
+    <select class="filter-dropdown">
+        <option disabled selected>Status</option>
+        <option>Currently Airing</option>
+        <option>Finished Airing</option>
+        <option>Not yet aired</option>
+    </select>
+
+    <!-- Clear Filters Button -->
+    <button class="clear-filters-button" onclick="clearFilters()">Clear Filters</button>
 </div>
 
 <script>
-    async function fetchGenres() {
-        try {
-            const res = await fetch("https://api.jikan.moe/v4/genres/anime", {
-                headers: { 'Content-Type': 'application/json' }
-            });
-
-            if (!res.ok) {
-                throw new Error(`HTTP error! Status: ${res.status}`);
-            }
-
-            const data = await res.json();
-            if (data && data.data && Array.isArray(data.data)) {
-                console.log("✅ Genres fetched:", data.data);
-                return data.data;
-            } else {
-                console.error("❌ Unexpected response structure:", data);
-                return [];
-            }
-
-        } catch (err) {
-            console.error("❌ Fetch failed:", err);
-            return [];
-        }
-    }
-
-    function populateGenres(dropdown, genres) {
-        if (!dropdown) {
-            console.error("❌ Dropdown element not found.");
-            return;
-        }
-
-        genres.forEach(genre => {
-            const option = document.createElement("option");
-            option.value = genre.mal_id;
-            option.textContent = genre.name;
-            dropdown.appendChild(option);
+    function clearFilters() {
+        const dropdowns = document.querySelectorAll('.filter-dropdown');
+        dropdowns.forEach(dropdown => {
+            dropdown.selectedIndex = 0;
         });
     }
-
-    document.addEventListener("DOMContentLoaded", async () => {
-        const dropdown = document.getElementById("filter1");
-
-        // Add loading indicator
-        dropdown.innerHTML = `<option value="">Loading genres...</option>`;
-
-        const genres = await fetchGenres();
-
-        // Clear and re-add default if genres were fetched
-        dropdown.innerHTML = `<option value="">Select Genre</option>`;
-
-        if (genres.length > 0) {
-            populateGenres(dropdown, genres);
-        } else {
-            const option = document.createElement("option");
-            option.value = "";
-            option.textContent = "No genres available";
-            dropdown.appendChild(option);
-        }
-    });
 </script>
+
+</body>
+</html>
