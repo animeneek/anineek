@@ -12,4 +12,40 @@
     <button id="randomButton">
         <i class="fa-solid fa-shuffle icon"></i>
     </button>
+
+    <!-- Dropdown Filters -->
+    <div class="filter-container">
+        <select id="genreFilter" multiple>
+            <option value="" disabled selected>Genre</option>
+            <!-- Add genre options -->
+        </select>
+        <select id="themeFilter" multiple>
+            <option value="" disabled selected>Theme</option>
+            <!-- Add theme options -->
+        </select>
+        <select id="demographicFilter" multiple>
+            <option value="" disabled selected>Demographic</option>
+            <!-- Add demographic options -->
+        </select>
+        <select id="yearFilter">
+            <option value="" disabled selected>Year</option>
+            <!-- Add year options -->
+        </select>
+        <select id="typeFilter">
+            <option value="" disabled selected>Type</option>
+            <option value="tv">TV</option>
+            <option value="movie">Movie</option>
+            <option value="ova">OVA</option>
+            <option value="special">Special</option>
+            <option value="ona">ONA</option>
+            <option value="music">Music</option>
+        </select>
+        <select id="statusFilter">
+            <option value="" disabled selected>Status</option>
+            <option value="airing">Airing</option>
+            <option value="completed">Completed</option>
+            <option value="upcoming">Upcoming</option>
+        </select>
+        <button id="applyFilterButton">Apply Filter</button>
+    </div>
 </header>
