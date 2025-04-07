@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Menu</title>
+    <style>
+        /* Add necessary styles here */
+        .filter-menu {
+            display: flex;
+            flex-direction: column;
+            margin: 10px 0;
+        }
+        .filter-menu label {
+            margin-right: 10px;
+        }
+        .filter-menu button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="filter-menu">
+        <h2>Filter by Genre</h2>
+        <div id="genreDropdown">
+            <!-- Genres will be populated here -->
+        </div>
+        <button onclick="clearFilters()">Clear Filters</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            fetchGenres();
+        });
+
+        async function fetchGenres() {
+            try {
+                const response = await fetch('https://api.jikan.moe/v4/genres/anime');
+                const data = await response.json();
+                const genres = data.data.sort((a, b) => a.name.localeCompare(b.name));
+                const genreDropdown = document.getElementById('genreDropdown');
+
+                genres.forEach(genre => {
+                    const label = document.createElement('label');
+                    label.innerHTML = `<input type="checkbox" value="${genre.mal_id}" onchange="searchAnime()"/> ${genre.name}`;
+                    genreDropdown.appendChild(label);
+                });
+            } catch (error) {
+                console.error("Error fetching genres:", error);
+            }
+        }
+
+        function getSelectedGenres() {
+            const selectedGenres = [];
+            document.querySelectorAll('#genreDropdown input[type="checkbox"]:checked').forEach(checkbox => {
+                selectedGenres.push(checkbox.value);
+            });
+            return selectedGenres;
+        }
+
+        function clearFilters() {
+            document.querySelectorAll('#genreDropdown input[type="checkbox"]:checked').forEach(checkbox => checkbox.checked = false);
+            searchAnime();
+        }
+
+        async function searchAnime() {
+            // Add your search logic here
+            const query = ''; // Replace with actual search query
+            const selectedGenres = getSelectedGenres();
+            const url = `https://api.jikan.moe/v4/anime?q=${query}&genres=${selectedGenres.join(',')}&limit=25&page=1`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                // Display search results
+            } catch (error) {
+                console.error("Error fetching anime:", error);
+            }
+        }
+    </script>
+</body>
+</html>
