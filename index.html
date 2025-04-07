@@ -1,60 +1,66 @@
-<div id="filterMenu" class="filter-menu" style="background-color: #222; padding: 10px; border: 1px solid black;">
-    <select class="filter-dropdown" id="filter1"></select>
-    <select class="filter-dropdown" id="filter2"></select>
-    <select class="filter-dropdown" id="filter3"></select>
-    <select class="filter-dropdown" id="filter4"></select>
-    <select class="filter-dropdown" id="filter5"></select>
-    <select class="filter-dropdown" id="filter6"></select>
-    <button id="clearFilters" class="clear-filters-button">Clear Filters</button>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>AniNeek v19.17</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://kit.fontawesome.com/8e3f3e5f4e.js" crossorigin="anonymous"></script>
+</head>
+<body>
 
-<script>
-    const genres = [
-        { value: "1", text: "Action" }, { value: "2", text: "Adventure" },
-        { value: "3", text: "Cars" }, { value: "4", text: "Comedy" },
-        { value: "5", text: "Dementia" }, { value: "6", text: "Demons" },
-        { value: "7", text: "Mystery" }, { value: "8", text: "Drama" },
-        { value: "9", text: "Ecchi" }, { value: "10", text: "Fantasy" },
-        { value: "11", text: "Game" }, { value: "12", text: "Hentai" },
-        { value: "13", text: "Historical" }, { value: "14", text: "Horror" },
-        { value: "15", text: "Kids" }, { value: "16", text: "Magic" },
-        { value: "17", text: "Martial Arts" }, { value: "18", text: "Mecha" },
-        { value: "19", text: "Music" }, { value: "20", text: "Parody" },
-        { value: "21", text: "Samurai" }, { value: "22", text: "Romance" },
-        { value: "23", text: "School" }, { value: "24", text: "Sci-Fi" },
-        { value: "25", text: "Shoujo" }, { value: "26", text: "Shoujo Ai" },
-        { value: "27", text: "Shounen" }, { value: "28", text: "Shounen Ai" },
-        { value: "29", text: "Space" }, { value: "30", text: "Sports" },
-        { value: "31", text: "Super Power" }, { value: "32", text: "Vampire" },
-        { value: "33", text: "Yaoi" }, { value: "34", text: "Yuri" },
-        { value: "35", text: "Harem" }, { value: "36", text: "Slice of Life" },
-        { value: "37", text: "Supernatural" }, { value: "38", text: "Military" },
-        { value: "39", text: "Police" }, { value: "40", text: "Psychological" },
-        { value: "41", text: "Thriller" }, { value: "42", text: "Seinen" },
-        { value: "43", text: "Josei" }
-    ];
+    <!-- Include Header -->
+    <div id="header"></div>
 
-    function populateDropdown(dropdown) {
-        dropdown.innerHTML = ""; // Clear existing options
-        const defaultOption = document.createElement("option");
-        defaultOption.value = "";
-        defaultOption.text = "Select Genre";
-        dropdown.add(defaultOption);
+    <!-- Include Filter Menu -->
+    <div id="filterMenuContainer"></div>
 
-        genres.forEach(genre => {
-            const option = document.createElement("option");
-            option.value = genre.value;
-            option.text = genre.text;
-            dropdown.add(option);
-        });
-    }
+    <!-- Slider Container -->
+    <div id="sliderContainer" class="slider-container">
+        <div id="slider" class="slider"></div>
+        <div class="slider-navigation">
+            <button id="prevSlide" class="slider-nav-button">&#10094;</button>
+            <button id="nextSlide" class="slider-nav-button">&#10095;</button>
+        </div>
+        <div id="sliderDots" class="slider-dots"></div>
+    </div>
 
-    document.addEventListener("DOMContentLoaded", () => {
-        for (let i = 1; i <= 6; i++) {
-            const dropdown = document.getElementById(`filter${i}`);
-            if (dropdown) {
-                populateDropdown(dropdown);
-            }
-        }
-    });
-</script>
+    <!-- Box Container with Tab Headings and Anime List -->
+    <div id="animeTabsContainer" class="anime-tabs-container">
+        <div class="tab-headings">
+            <button class="tab-button active" data-tab="newest">Newest</button>
+            <button class="tab-button" data-tab="popular">Popular</button>
+            <button class="tab-button" data-tab="top-rated">Top Rated</button>
+            <div class="pagination">
+                <button id="prevPage" class="pagination-button"> &lt; </button>
+                <span id="currentPage" class="pagination-current">1</span>
+                <button id="nextPage" class="pagination-button"> &gt; </button>
+            </div>
+        </div>
+        <div id="animeList" class="anime-list"></div>
+    </div>
+
+    <script>
+        fetch("header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header").innerHTML = data;
+                // Initialize search and random functionality after loading the header
+                initializeSearchAndRandom();
+            });
+
+        fetch("filter-menu.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("filterMenuContainer").innerHTML = data;
+            });
+    </script>
+
+    <script src="index.js"></script>
+    <script src="slider.js"></script>
+    <script src="tabs.js"></script>
+    <script src="anilist-image-replacer.js"></script>
+
+</body>
+</html>
