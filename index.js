@@ -55,3 +55,5 @@ function applyFiltersAndSearch(query) {
 
     window.location.href = searchUrl;
 }
+
+document.addEventListener("DOMContentLoaded", initializeSearchAndRandom);
