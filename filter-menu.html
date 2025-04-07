@@ -1,206 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Anime Filter Menu</title>
-  <style>
-    body {
-      background: #111;
-      color: #fff;
-      font-family: sans-serif;
-    }
+    <meta charset="UTF-8">
+    <title>Anime Filter Menu</title>
+    <style>
+        /* Filter Menu Styling */
 
-    .filter-menu {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      background: #222;
-      padding: 10px 20px;
-      border-radius: 5px;
-      margin-top: 80px;
-      z-index: 999;
-    }
+        .filter-menu {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            background: #222;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 80px; /* Adjust this value if needed */
+            z-index: 999; /* Ensure it stays on top */
+        }
 
-    .dropdown {
-      position: relative;
-      min-width: 180px;
-    }
+        .filter-dropdown {
+            background: #333;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 5px;
+        }
 
-    .dropdown-button {
-      background: #333;
-      color: #fff;
-      border: 1px solid #444;
-      padding: 8px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-      text-align: left;
-    }
+        .clear-filters-button {
+            background: #ff4444;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+            margin: 5px;
+        }
 
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #333;
-      border: 1px solid #444;
-      border-radius: 5px;
-      max-height: 200px;
-      overflow-y: auto;
-      width: 100%;
-      top: 110%;
-      z-index: 1000;
-    }
-
-    .dropdown-content label {
-      display: block;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-
-    .dropdown-content label:hover {
-      background-color: #444;
-    }
-
-    .dropdown.open .dropdown-content {
-      display: block;
-    }
-
-    .clear-filters-button {
-      background: #ff4444;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: background 0.3s;
-      height: 42px;
-      align-self: center;
-    }
-
-    .clear-filters-button:hover {
-      background: #ff2222;
-    }
-
-    /* Style for multi-select checkboxes */
-    .dropdown-content input[type="checkbox"] {
-      margin-right: 10px;
-    }
-  </style>
+        .clear-filters-button:hover {
+            background: #ff2222;
+        }
+    </style>
 </head>
 <body>
 
 <div class="filter-menu">
-  <!-- Genres -->
-  <select class="dropdown">
-    <div class="dropdown-button">Genres</div>
-    <div class="dropdown-content">
-      <label><input type="checkbox" value="Action"> Action</label>
-      <label><input type="checkbox" value="Adventure"> Adventure</label>
-      <label><input type="checkbox" value="Comedy"> Comedy</label>
-      <label><input type="checkbox" value="Drama"> Drama</label>
-      <label><input type="checkbox" value="Fantasy"> Fantasy</label>
-      <label><input type="checkbox" value="Horror"> Horror</label>
-      <label><input type="checkbox" value="Mystery"> Mystery</label>
-      <label><input type="checkbox" value="Romance"> Romance</label>
-      <label><input type="checkbox" value="Sci-Fi"> Sci-Fi</label>
-      <label><input type="checkbox" value="Supernatural"> Supernatural</label>
-      <label><input type="checkbox" value="Ecchi"> Ecchi</label>
-      <label><input type="checkbox" value="Hentai"> Hentai</label>
-      <label><input type="checkbox" value="Erotica"> Erotica</label>
-    </div>
-  </select>
+    <!-- Genres -->
+    <select class="filter-dropdown">
+        <option disabled selected>Genres</option>
+        <option>Action</option>
+        <option>Adventure</option>
+        <option>Avant Garde</option>
+        <option>Comedy</option>
+        <option>Drama</option>
+        <option>Fantasy</option>
+        <option>Horror</option>
+        <option>Mystery</option>
+        <option>Romance</option>
+        <option>Sci-Fi</option>
+        <option>Slice of Life</option>
+        <option>Sports</option>
+        <option>Supernatural</option>
+        <!-- Explicit genres -->
+        <option>Ecchi</option>
+        <option>Hentai</option>
+        <option>Erotica</option>
+    </select>
 
-  <!-- Themes -->
-  <select class="dropdown">
-    <div class="dropdown-button">Themes</div>
-    <div class="dropdown-content">
-      <label><input type="checkbox" value="Isekai"> Isekai</label>
-      <label><input type="checkbox" value="Harem"> Harem</label>
-      <label><input type="checkbox" value="Gore"> Gore</label>
-      <label><input type="checkbox" value="Psychological"> Psychological</label>
-      <label><input type="checkbox" value="Military"> Military</label>
-      <label><input type="checkbox" value="School"> School</label>
-      <label><input type="checkbox" value="Time Travel"> Time Travel</label>
-      <label><input type="checkbox" value="Mecha"> Mecha</label>
-    </div>
-  </select>
+    <!-- Themes -->
+    <select class="filter-dropdown">
+        <option disabled selected>Themes</option>
+        <option>Anthropomorphic</option>
+        <option>CGDCT</option>
+        <option>Childcare</option>
+        <option>Combat Sports</option>
+        <option>Crossdressing</option>
+        <option>Delinquents</option>
+        <option>Detective</option>
+        <option>Gag Humor</option>
+        <option>Gore</option>
+        <option>Harem</option>
+        <option>High Stakes Game</option>
+        <option>Historical</option>
+        <option>Idols (Female)</option>
+        <option>Idols (Male)</option>
+        <option>Isekai</option>
+        <option>Iyashikei</option>
+        <option>Love Polygon</option>
+        <option>Magical Sex Shift</option>
+        <option>Mahou Shoujo</option>
+        <option>Martial Arts</option>
+        <option>Mecha</option>
+        <option>Medical</option>
+        <option>Military</option>
+        <option>Music</option>
+        <option>Mythology</option>
+        <option>Organized Crime</option>
+        <option>Otaku Culture</option>
+        <option>Parody</option>
+        <option>Performing Arts</option>
+        <option>Pirates</option>
+        <option>Psychological</option>
+        <option>Racing</option>
+        <option>Reincarnation</option>
+        <option>Reverse Harem</option>
+        <option>Romantic Subtext</option>
+        <option>Samurai</option>
+        <option>School</option>
+        <option>Showbiz</option>
+        <option>Space</option>
+        <option>Strategy Game</option>
+        <option>Super Power</option>
+        <option>Survival</option>
+        <option>Team Sports</option>
+        <option>Time Travel</option>
+        <option>Vampire</option>
+        <option>Video Game</option>
+        <option>Villainess</option>
+        <option>Visual Arts</option>
+        <option>Workplace</option>
+    </select>
 
-  <!-- Demographics -->
-  <select class="dropdown">
-    <div class="dropdown-button">Demographics</div>
-    <div class="dropdown-content">
-      <label><input type="checkbox" value="Shounen"> Shounen</label>
-      <label><input type="checkbox" value="Shoujo"> Shoujo</label>
-      <label><input type="checkbox" value="Seinen"> Seinen</label>
-      <label><input type="checkbox" value="Josei"> Josei</label>
-      <label><input type="checkbox" value="Kodomo"> Kodomo</label>
-    </div>
-  </select>
+    <!-- Demographics -->
+    <select class="filter-dropdown">
+        <option disabled selected>Demographics</option>
+        <option>Shounen</option>
+        <option>Shoujo</option>
+        <option>Seinen</option>
+        <option>Josei</option>
+        <option>Kodomo</option>
+    </select>
 
-  <!-- Anime Seasons -->
-  <select class="dropdown">
-    <div class="dropdown-button">Anime Seasons</div>
-    <div class="dropdown-content">
-      <label><input type="checkbox" value="Winter"> Winter</label>
-      <label><input type="checkbox" value="Spring"> Spring</label>
-      <label><input type="checkbox" value="Summer"> Summer</label>
-      <label><input type="checkbox" value="Fall"> Fall</label>
-    </div>
-  </select>
+    <!-- Anime Seasons -->
+    <select class="filter-dropdown">
+        <option disabled selected>Anime Seasons</option>
+        <option>Winter</option>
+        <option>Spring</option>
+        <option>Summer</option>
+        <option>Fall</option>
+    </select>
 
-  <!-- Type -->
-  <select class="dropdown">
-    <div class="dropdown-button">Type</div>
-    <div class="dropdown-content">
-      <label><input type="checkbox" value="TV"> TV</label>
-      <label><input type="checkbox" value="Movie"> Movie</label>
-      <label><input type="checkbox" value="OVA"> OVA</label>
-      <label><input type="checkbox" value="ONA"> ONA</label>
-      <label><input type="checkbox" value="Special"> Special</label>
-      <label><input type="checkbox" value="Music"> Music</label>
-    </div>
-  </select>
+    <!-- Type -->
+    <select class="filter-dropdown">
+        <option disabled selected>Type</option>
+        <option>TV</option>
+        <option>OVA</option>
+        <option>ONA</option>
+        <option>Movie</option>
+        <option>Special</option>
+        <option>Music</option>
+    </select>
 
-  <!-- Status -->
-  <select class="dropdown">
-    <div class="dropdown-button">Status</div>
-    <div class="dropdown-content">
-      <label><input type="checkbox" value="Currently Airing"> Currently Airing</label>
-      <label><input type="checkbox" value="Finished Airing"> Finished Airing</label>
-      <label><input type="checkbox" value="Not yet aired"> Not yet aired</label>
-    </div>
-  </select>
+    <!-- Status -->
+    <select class="filter-dropdown">
+        <option disabled selected>Status</option>
+        <option>Currently Airing</option>
+        <option>Finished Airing</option>
+        <option>Not yet aired</option>
+    </select>
 
-  <!-- Clear Filters Button -->
-  <button class="clear-filters-button" onclick="clearFilters()">Clear Filters</button>
+    <!-- Clear Filters Button -->
+    <button class="clear-filters-button" onclick="clearFilters()">Clear Filters</button>
 </div>
 
 <script>
-  // Toggle dropdowns
-  document.querySelectorAll('.dropdown-button').forEach(button => {
-    button.addEventListener('click', function () {
-      const parent = this.parentElement;
-      parent.classList.toggle('open');
-
-      // Close other dropdowns
-      document.querySelectorAll('.dropdown').forEach(drop => {
-        if (drop !== parent) drop.classList.remove('open');
-      });
-    });
-  });
-
-  // Click outside to close dropdowns
-  document.addEventListener('click', function (e) {
-    if (!e.target.closest('.dropdown')) {
-      document.querySelectorAll('.dropdown').forEach(drop => drop.classList.remove('open'));
+    function clearFilters() {
+        const dropdowns = document.querySelectorAll('.filter-dropdown');
+        dropdowns.forEach(dropdown => {
+            dropdown.selectedIndex = 0;
+        });
     }
-  });
-
-  // Clear filters
-  function clearFilters() {
-    document.querySelectorAll('.dropdown-content input[type="checkbox"]').forEach(input => {
-      input.checked = false;
-    });
-  }
 </script>
 
 </body>
