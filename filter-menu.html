@@ -19,6 +19,7 @@
         }
 
         .filter-dropdown {
+            position: relative;
             background: #333;
             color: #fff;
             border: 1px solid #444;
@@ -26,6 +27,35 @@
             border-radius: 5px;
             margin: 5px;
             max-width: 200px;
+            cursor: pointer;
+        }
+
+        .filter-dropdown select {
+            display: none; /* Hide the default select box */
+        }
+
+        .filter-dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #333;
+            color: white;
+            width: 100%;
+            padding: 5px;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 999;
+        }
+
+        .filter-dropdown-content label {
+            display: block;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .filter-dropdown-content label:hover {
+            background-color: #444;
         }
 
         .clear-filters-button {
@@ -48,114 +78,111 @@
 
 <div class="filter-menu">
     <!-- Genres -->
-    <select class="filter-dropdown" multiple>
-        <option disabled>Genres</option>
-        <!-- These values should ideally be fetched from MyAnimeList API -->
-        <option>Action</option>
-        <option>Adventure</option>
-        <option>Comedy</option>
-        <option>Drama</option>
-        <option>Fantasy</option>
-        <option>Horror</option>
-        <option>Romance</option>
-    </select>
+    <div class="filter-dropdown" id="genres">
+        <span>Select Genres</span>
+        <div class="filter-dropdown-content" id="genres-dropdown">
+            <!-- These values should ideally be fetched from MyAnimeList API -->
+            <label><input type="checkbox" value="Action"> Action</label>
+            <label><input type="checkbox" value="Adventure"> Adventure</label>
+            <label><input type="checkbox" value="Comedy"> Comedy</label>
+            <label><input type="checkbox" value="Drama"> Drama</label>
+            <label><input type="checkbox" value="Fantasy"> Fantasy</label>
+            <label><input type="checkbox" value="Horror"> Horror</label>
+            <label><input type="checkbox" value="Romance"> Romance</label>
+        </div>
+    </div>
 
     <!-- Themes -->
-    <select class="filter-dropdown" multiple>
-        <option disabled>Themes</option>
-        <!-- These values should ideally be fetched from MyAnimeList API -->
-        <option>Anthropomorphic</option>
-        <option>Combat Sports</option>
-        <option>Detective</option>
-        <option>Gore</option>
-        <option>Harem</option>
-        <option>Isekai</option>
-        <option>Psychological</option>
-    </select>
+    <div class="filter-dropdown" id="themes">
+        <span>Select Themes</span>
+        <div class="filter-dropdown-content" id="themes-dropdown">
+            <label><input type="checkbox" value="Anthropomorphic"> Anthropomorphic</label>
+            <label><input type="checkbox" value="Combat Sports"> Combat Sports</label>
+            <label><input type="checkbox" value="Detective"> Detective</label>
+            <label><input type="checkbox" value="Gore"> Gore</label>
+            <label><input type="checkbox" value="Harem"> Harem</label>
+            <label><input type="checkbox" value="Isekai"> Isekai</label>
+            <label><input type="checkbox" value="Psychological"> Psychological</label>
+        </div>
+    </div>
 
     <!-- Demographics -->
-    <select class="filter-dropdown" multiple>
-        <option disabled>Demographics</option>
-        <option>Shounen</option>
-        <option>Shoujo</option>
-        <option>Seinen</option>
-        <option>Josei</option>
-        <option>Kodomo</option>
-    </select>
+    <div class="filter-dropdown" id="demographics">
+        <span>Select Demographics</span>
+        <div class="filter-dropdown-content" id="demographics-dropdown">
+            <label><input type="checkbox" value="Shounen"> Shounen</label>
+            <label><input type="checkbox" value="Shoujo"> Shoujo</label>
+            <label><input type="checkbox" value="Seinen"> Seinen</label>
+            <label><input type="checkbox" value="Josei"> Josei</label>
+            <label><input type="checkbox" value="Kodomo"> Kodomo</label>
+        </div>
+    </div>
 
     <!-- Anime Seasons -->
-    <select class="filter-dropdown" multiple>
-        <option disabled>Anime Seasons</option>
-        <option>Winter</option>
-        <option>Spring</option>
-        <option>Summer</option>
-        <option>Fall</option>
-    </select>
+    <div class="filter-dropdown" id="seasons">
+        <span>Select Anime Seasons</span>
+        <div class="filter-dropdown-content" id="seasons-dropdown">
+            <label><input type="checkbox" value="Winter"> Winter</label>
+            <label><input type="checkbox" value="Spring"> Spring</label>
+            <label><input type="checkbox" value="Summer"> Summer</label>
+            <label><input type="checkbox" value="Fall"> Fall</label>
+        </div>
+    </div>
 
     <!-- Type -->
-    <select class="filter-dropdown" multiple>
-        <option disabled>Type</option>
-        <option>TV</option>
-        <option>OVA</option>
-        <option>ONA</option>
-        <option>Movie</option>
-        <option>Special</option>
-        <option>Music</option>
-    </select>
+    <div class="filter-dropdown" id="types">
+        <span>Select Type</span>
+        <div class="filter-dropdown-content" id="types-dropdown">
+            <label><input type="checkbox" value="TV"> TV</label>
+            <label><input type="checkbox" value="OVA"> OVA</label>
+            <label><input type="checkbox" value="ONA"> ONA</label>
+            <label><input type="checkbox" value="Movie"> Movie</label>
+            <label><input type="checkbox" value="Special"> Special</label>
+            <label><input type="checkbox" value="Music"> Music</label>
+        </div>
+    </div>
 
     <!-- Status -->
-    <select class="filter-dropdown" multiple>
-        <option disabled>Status</option>
-        <option>Currently Airing</option>
-        <option>Finished Airing</option>
-        <option>Not yet aired</option>
-    </select>
+    <div class="filter-dropdown" id="status">
+        <span>Select Status</span>
+        <div class="filter-dropdown-content" id="status-dropdown">
+            <label><input type="checkbox" value="Currently Airing"> Currently Airing</label>
+            <label><input type="checkbox" value="Finished Airing"> Finished Airing</label>
+            <label><input type="checkbox" value="Not yet aired"> Not yet aired</label>
+        </div>
+    </div>
 
     <!-- Clear Filters Button -->
     <button class="clear-filters-button" onclick="clearFilters()">Clear Filters</button>
 </div>
 
 <script>
-    // Fetching data from MyAnimeList (or an API) for genres, themes, demographics, etc. (example with static data)
-
-    // Placeholder function for fetching data from an API (MyAnimeList or another source)
-    function fetchFilterData() {
-        // Sample data; ideally you'd fetch this from an API endpoint
-        const genres = ["Action", "Adventure", "Comedy", "Drama", "Fantasy", "Horror", "Romance"];
-        const themes = ["Anthropomorphic", "Combat Sports", "Detective", "Gore", "Harem", "Isekai", "Psychological"];
-        const demographics = ["Shounen", "Shoujo", "Seinen", "Josei", "Kodomo"];
-        const seasons = ["Winter", "Spring", "Summer", "Fall"];
-        const types = ["TV", "OVA", "ONA", "Movie", "Special", "Music"];
-        const statuses = ["Currently Airing", "Finished Airing", "Not yet aired"];
-
-        // Populate the dropdowns with these values dynamically
-        populateDropdown('genres', genres);
-        populateDropdown('themes', themes);
-        populateDropdown('demographics', demographics);
-        populateDropdown('seasons', seasons);
-        populateDropdown('types', types);
-        populateDropdown('statuses', statuses);
-    }
-
-    function populateDropdown(id, values) {
-        const dropdown = document.getElementById(id);
-        values.forEach(value => {
-            const option = document.createElement('option');
-            option.value = value;
-            option.textContent = value;
-            dropdown.appendChild(option);
+    // Function to toggle the dropdown content visibility
+    const filterDropdowns = document.querySelectorAll('.filter-dropdown');
+    filterDropdowns.forEach(dropdown => {
+        dropdown.addEventListener('click', function(event) {
+            const content = dropdown.querySelector('.filter-dropdown-content');
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            event.stopPropagation(); // Prevent event propagation to body
         });
-    }
+    });
 
+    // Function to clear all filters (checkbox selections)
     function clearFilters() {
-        const dropdowns = document.querySelectorAll('.filter-dropdown');
-        dropdowns.forEach(dropdown => {
-            dropdown.selectedIndex = -1;  // Clear selection for multi-select
+        const checkboxes = document.querySelectorAll('.filter-dropdown-content input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
         });
     }
 
-    // Initialize filter data fetching
-    fetchFilterData();
+    // Close dropdowns if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.filter-dropdown')) {
+            document.querySelectorAll('.filter-dropdown-content').forEach(content => {
+                content.style.display = 'none';
+            });
+        }
+    });
 </script>
 
 </body>
