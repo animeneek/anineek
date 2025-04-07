@@ -79,13 +79,18 @@
     .clear-filters-button:hover {
       background: #ff2222;
     }
+
+    /* Style for multi-select */
+    .dropdown-content input[type="checkbox"] {
+      margin-right: 10px;
+    }
   </style>
 </head>
 <body>
 
 <div class="filter-menu">
-  <!-- Dropdown Template -->
-  <div class="dropdown" data-label="Genres">
+  <!-- Genres -->
+  <div class="dropdown">
     <div class="dropdown-button">Genres</div>
     <div class="dropdown-content">
       <label><input type="checkbox" value="Action"> Action</label>
@@ -104,7 +109,8 @@
     </div>
   </div>
 
-  <div class="dropdown" data-label="Themes">
+  <!-- Themes -->
+  <div class="dropdown">
     <div class="dropdown-button">Themes</div>
     <div class="dropdown-content">
       <label><input type="checkbox" value="Isekai"> Isekai</label>
@@ -119,7 +125,8 @@
     </div>
   </div>
 
-  <div class="dropdown" data-label="Demographics">
+  <!-- Demographics -->
+  <div class="dropdown">
     <div class="dropdown-button">Demographics</div>
     <div class="dropdown-content">
       <label><input type="checkbox" value="Shounen"> Shounen</label>
@@ -130,7 +137,8 @@
     </div>
   </div>
 
-  <div class="dropdown" data-label="Seasons">
+  <!-- Anime Seasons -->
+  <div class="dropdown">
     <div class="dropdown-button">Anime Seasons</div>
     <div class="dropdown-content">
       <label><input type="checkbox" value="Winter"> Winter</label>
@@ -140,7 +148,8 @@
     </div>
   </div>
 
-  <div class="dropdown" data-label="Type">
+  <!-- Type -->
+  <div class="dropdown">
     <div class="dropdown-button">Type</div>
     <div class="dropdown-content">
       <label><input type="checkbox" value="TV"> TV</label>
@@ -152,7 +161,8 @@
     </div>
   </div>
 
-  <div class="dropdown" data-label="Status">
+  <!-- Status -->
+  <div class="dropdown">
     <div class="dropdown-button">Status</div>
     <div class="dropdown-content">
       <label><input type="checkbox" value="Currently Airing"> Currently Airing</label>
@@ -161,6 +171,7 @@
     </div>
   </div>
 
+  <!-- Clear Filters Button -->
   <button class="clear-filters-button" onclick="clearFilters()">Clear Filters</button>
 </div>
 
