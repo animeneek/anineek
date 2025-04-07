@@ -78,6 +78,11 @@ function initializeFilters() {
     clearFiltersButton.addEventListener("click", () => {
         clearFilters();
     });
+
+    // Apply filters when any dropdown changes
+    document.querySelectorAll('.filter-container select').forEach(select => {
+        select.addEventListener('change', applyFilters);
+    });
 }
 
 // Apply filters based on dropdown selections
