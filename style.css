@@ -1013,7 +1013,7 @@ main {
 /* Filter Container */
 .filter-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column; /* Stacks dropdowns vertically */
     gap: 10px;
     margin-top: 10px;
 }
