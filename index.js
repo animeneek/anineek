@@ -13,7 +13,6 @@ function initializeSearchAndRandom() {
         if (query) {
             window.location.href = `search.html?q=${query}`;
         } else {
-            // Fetch and display all anime by popularity
             fetchAllAnime();
         }
     });
@@ -29,42 +28,47 @@ function initializeSearchAndRandom() {
 }
 
 function initializeFilters() {
-    const genresDropdown = document.getElementById("genres");
-    const themesDropdown = document.getElementById("themes");
-    const demographicsDropdown = document.getElementById("demographics");
-    const seasonsDropdown = document.getElementById("seasons");
-    const typesDropdown = document.getElementById("types");
-    const statusDropdown = document.getElementById("status");
+    const dropdowns = {
+        genres: document.getElementById("genres"),
+        themes: document.getElementById("themes"),
+        demographics: document.getElementById("demographics"),
+        seasons: document.getElementById("seasons"),
+        types: document.getElementById("types"),
+        status: document.getElementById("status")
+    };
 
-    // Fetch and populate dropdowns with data from MyAnimeList API
-    fetchGenres(genresDropdown);
-    fetchThemes(themesDropdown);
-    fetchDemographics(demographicsDropdown);
-    fetchSeasons(seasonsDropdown);
-    fetchTypes(typesDropdown);
-    fetchStatus(statusDropdown);
+    // Fetch and populate dropdowns
+    fetchGenres(dropdowns.genres);
+    fetchThemes(dropdowns.themes);
+    fetchDemographics(dropdowns.demographics);
+    fetchSeasons(dropdowns.seasons);
+    fetchTypes(dropdowns.types);
+    fetchStatus(dropdowns.status);
 
     // Add event listeners for filtering
-    const dropdowns = [genresDropdown, themesDropdown, demographicsDropdown, seasonsDropdown, typesDropdown, statusDropdown];
-    dropdowns.forEach(dropdown => {
+    Object.values(dropdowns).forEach(dropdown => {
         dropdown.addEventListener("change", () => filterResults());
     });
 
     document.getElementById("clearFilters").addEventListener("click", clearFilters);
 }
 
-function filterResults() {
-    // Get selected values from dropdowns
-    const selectedGenres = Array.from(document.getElementById("genres").selectedOptions).map(option => option.value);
-    const selectedThemes = Array.from(document.getElementById("themes").selectedOptions).map(option => option.value);
-    const selectedDemographics = Array.from(document.getElementById("demographics").selectedOptions).map(option => option.value);
-    const selectedSeasons = Array.from(document.getElementById("seasons").selectedOptions).map(option => option.value);
-    const selectedTypes = Array.from(document.getElementById("types").selectedOptions).map(option => option.value);
-    const selectedStatus = Array.from(document.getElementById("status").selectedOptions).map(option => option.value);
-
-    // Fetch and filter results based on selected values
-    fetchFilteredAnime(selectedGenres, selectedThemes, selectedDemographics, selectedSeasons, selectedTypes, selectedStatus);
+// Example function to fetch genres
+function fetchGenres(dropdown) {
+    fetch('https://api.jikan.moe/v4/genres/anime')
+        .then(response => response.json())
+        .then(data => {
+            data.data.forEach(genre => {
+                const option = document.createElement("option");
+                option.value = genre.mal_id;
+                option.textContent = genre.name;
+                dropdown.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching genres:', error));
 }
+
+// Implement similar fetch functions for themes, demographics, seasons, types, and status
 
 function clearFilters() {
     const dropdowns = document.querySelectorAll("#filters select");
@@ -74,35 +78,4 @@ function clearFilters() {
     fetchAllAnime(); // Optionally fetch and display all results again
 }
 
-// Functions to fetch dropdown options from MyAnimeList API
-function fetchGenres(dropdown) {
-    // Fetch genres from MyAnimeList API and populate dropdown
-}
-
-function fetchThemes(dropdown) {
-    // Fetch themes from MyAnimeList API and populate dropdown
-}
-
-function fetchDemographics(dropdown) {
-    // Fetch demographics from MyAnimeList API and populate dropdown
-}
-
-function fetchSeasons(dropdown) {
-    // Fetch seasons from MyAnimeList API and populate dropdown
-}
-
-function fetchTypes(dropdown) {
-    // Fetch types from MyAnimeList API and populate dropdown
-}
-
-function fetchStatus(dropdown) {
-    // Fetch status from MyAnimeList API and populate dropdown
-}
-
-function fetchAllAnime() {
-    // Fetch and display all anime by popularity
-}
-
-function fetchFilteredAnime(genres, themes, demographics, seasons, types, status) {
-    // Fetch and display filtered anime based on the selected criteria
-}
+// Implement the fetchAllAnime and fetchFilteredAnime functions as needed
