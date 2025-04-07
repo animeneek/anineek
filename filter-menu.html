@@ -1,5 +1,7 @@
 <div id="filterMenu" class="filter-menu" style="background-color: #222; padding: 10px; border: 1px solid black;">
-    <select class="filter-dropdown" id="filter1"></select>
+    <select class="filter-dropdown" id="filter1">
+        <option value="">Select Genre</option>
+    </select>
     <select class="filter-dropdown" id="filter2"></select>
     <select class="filter-dropdown" id="filter3"></select>
     <select class="filter-dropdown" id="filter4"></select>
@@ -7,3 +9,66 @@
     <select class="filter-dropdown" id="filter6"></select>
     <button id="clearFilters" class="clear-filters-button">Clear Filters</button>
 </div>
+
+<script>
+    // List of genres as per MyAnimeList, including explicit genres
+    const genres = [
+        { value: "action", text: "Action" },
+        { value: "adventure", text: "Adventure" },
+        { value: "cars", text: "Cars" },
+        { value: "comedy", text: "Comedy" },
+        { value: "dementia", text: "Dementia" },
+        { value: "demons", text: "Demons" },
+        { value: "mystery", text: "Mystery" },
+        { value: "drama", text: "Drama" },
+        { value: "ecchi", text: "Ecchi" },
+        { value: "fantasy", text: "Fantasy" },
+        { value: "game", text: "Game" },
+        { value: "hentai", text: "Hentai" },
+        { value: "historical", text: "Historical" },
+        { value: "horror", text: "Horror" },
+        { value: "kids", text: "Kids" },
+        { value: "magic", text: "Magic" },
+        { value: "martial-arts", text: "Martial Arts" },
+        { value: "mecha", text: "Mecha" },
+        { value: "music", text: "Music" },
+        { value: "parody", text: "Parody" },
+        { value: "samurai", text: "Samurai" },
+        { value: "romance", text: "Romance" },
+        { value: "school", text: "School" },
+        { value: "sci-fi", text: "Sci-Fi" },
+        { value: "shoujo", text: "Shoujo" },
+        { value: "shoujo-ai", text: "Shoujo Ai" },
+        { value: "shounen", text: "Shounen" },
+        { value: "shounen-ai", text: "Shounen Ai" },
+        { value: "space", text: "Space" },
+        { value: "sports", text: "Sports" },
+        { value: "super-power", text: "Super Power" },
+        { value: "vampire", text: "Vampire" },
+        { value: "yaoi", text: "Yaoi" },
+        { value: "yuri", text: "Yuri" },
+        { value: "harem", text: "Harem" },
+        { value: "slice-of-life", text: "Slice of Life" },
+        { value: "supernatural", text: "Supernatural" },
+        { value: "military", text: "Military" },
+        { value: "police", text: "Police" },
+        { value: "psychological", text: "Psychological" },
+        { value: "thriller", text: "Thriller" },
+        { value: "seinen", text: "Seinen" },
+        { value: "josei", text: "Josei" }
+    ];
+
+    // Function to populate the first dropdown with genres
+    function populateGenres() {
+        const filter1 = document.getElementById("filter1");
+        genres.forEach(genre => {
+            const option = document.createElement("option");
+            option.value = genre.value;
+            option.text = genre.text;
+            filter1.add(option);
+        });
+    }
+
+    // Call the function to populate genres when the page loads
+    document.addEventListener("DOMContentLoaded", populateGenres);
+</script>
