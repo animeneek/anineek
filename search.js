@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
-    const query = urlParams.get("q");
+    const query = urlParams.get("q") || ""; // Ensure query is not null
     const page = parseInt(urlParams.get("page")) || 1;
     const genre = urlParams.get("genre");
     const theme = urlParams.get("theme");
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchTitle = document.getElementById("searchTitle");
     const RESULTS_PER_PAGE = 25;
 
-    if (!query) {
+    if (!query && !genre && !theme && !demographic && !year && !type && !status) {
         animeResults.innerHTML = "<p>No search query provided.</p>";
         return;
     }
