@@ -1008,6 +1008,11 @@ main {
 
 /* You can add more media queries for extreme mobile resolutions or tablets if needed */
 /* Filter Menu Styling */
+
+.filterMenuContainer {
+    background: #222;
+}
+
 .filter-menu {
     display: flex;
     align-items: center;
