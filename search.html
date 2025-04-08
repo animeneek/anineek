@@ -13,14 +13,14 @@
     <!-- Include Header -->
     <div id="header"></div>
 
+    <!-- Include Filter Menu -->
+    <div id="filter-menu-container"></div>
+
     <main>
         <h1 id="searchTitle">Search Results</h1>
         <div id="animeResults" class="grid-container">Loading...</div>
         <div id="pagination"></div>
     </main>
-
-    <!-- Include Filter Menu -->
-    <div id="filter-menu-container"></div>
 
     <script>
         fetch("header.html")
@@ -41,13 +41,13 @@
 
         // Fetch and display search results based on query parameters
         const urlParams = new URLSearchParams(window.location.search);
-        const selectedGenres = urlParams.get('genres');
-        if (selectedGenres) {
-            searchAnime(selectedGenres.split(','));
+        const query = urlParams.get('q') || '';
+        const selectedGenres = urlParams.get('genres') ? urlParams.get('genres').split(',') : [];
+        if (selectedGenres.length > 0 || query) {
+            searchAnime(query, selectedGenres);
         }
 
-        async function searchAnime(genres) {
-            const query = ''; // Replace with actual search query if needed
+        async function searchAnime(query, genres) {
             const url = `https://api.jikan.moe/v4/anime?q=${query}&genres=${genres.join(',')}&limit=25&page=1`;
             try {
                 const response = await fetch(url);
@@ -68,10 +68,12 @@
 
                 animeItem.innerHTML = `
                     <div class="poster-container">
-                        <img src="${anime.images.jpg.image_url}" alt="${anime.title}" class="anime-poster">
-                        <div class="overlay">
-                            <div class="play-button"><i class="fas fa-play"></i></div>
-                        </div>
+                        <a href="info.html?id=${anime.mal_id}">
+                            <img src="${anime.images.jpg.image_url}" alt="${anime.title}" class="anime-poster">
+                            <div class="overlay">
+                                <div class="play-button"><i class="fas fa-play"></i></div>
+                            </div>
+                        </a>
                     </div>
                     <div class="anime-title">${anime.title}</div>
                     <div class="anime-details">
