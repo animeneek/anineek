@@ -26,7 +26,8 @@
             border: 1px solid #444;
             border-radius: 5px;
             color: #fff;
-            height: 150px; /* Set a height to show more options */
+            height: 150px; /* Height for scrollable dropdown */
+            overflow-y: auto; /* Enable vertical scrolling */
         }
         .filter-menu button {
             margin-top: 10px;
@@ -41,10 +42,6 @@
         .filter-menu button:hover {
             background: #ff6666;
         }
-        .selected-genres {
-            margin-top: 10px;
-            color: #ccc;
-        }
     </style>
 </head>
 <body>
@@ -54,14 +51,11 @@
             <!-- Genres will be populated here -->
         </select>
         <button onclick="applyFilters()">Apply Filters</button>
-        <div class="selected-genres" id="selectedGenresDisplay">Selected Genres: None</div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             fetchGenres();
-            // Display previously selected genres if any
-            displaySelectedGenres();
         });
 
         async function fetchGenres() {
@@ -86,27 +80,12 @@
             const selectedGenres = Array.from(document.getElementById('genreDropdown').selectedOptions).map(option => option.value);
             const searchParams = new URLSearchParams(window.location.search);
             const query = searchParams.get('q') || '';
-
-            // If there are selected genres, update the URL
             if (selectedGenres.length > 0) {
+                // Ensure the genres are included in the URL
                 const url = `search.html?q=${query}&genres=${selectedGenres.join(',')}`;
                 window.location.href = url;
             }
         }
-
-        // Display selected genres on the page
-        function displaySelectedGenres() {
-            const selectedGenres = Array.from(document.getElementById('genreDropdown').selectedOptions).map(option => option.text);
-            const selectedGenresDisplay = document.getElementById('selectedGenresDisplay');
-            if (selectedGenres.length > 0) {
-                selectedGenresDisplay.textContent = "Selected Genres: " + selectedGenres.join(', ');
-            } else {
-                selectedGenresDisplay.textContent = "Selected Genres: None";
-            }
-        }
-
-        // Event listener to update the display of selected genres
-        document.getElementById('genreDropdown').addEventListener('change', displaySelectedGenres);
     </script>
 </body>
 </html>
