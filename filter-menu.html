@@ -69,35 +69,19 @@
         .filter-menu button:hover {
             background: #ff6666;
         }
-            .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #fff;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-        z-index: 1;
-    }
-
-    .dropdown-content.open {
-        display: block;
-    }
-
-    .dropdown-content label {
-        display: block;
-    }
     </style>
 </head>
 <body>
     <div class="filter-menu">
-    <h2>Filter by Genre</h2>
-    <div class="dropdown">
-        <button class="dropdown-button">Select Genres</button>
-        <div class="dropdown-content" id="genreDropdown">
-            <!-- Genres will be populated here -->
+        <h2>Filter by Genre</h2>
+        <div class="dropdown">
+            <button class="dropdown-button">Select Genres</button>
+            <div class="dropdown-content" id="genreDropdown">
+                <!-- Genres will be populated here -->
+            </div>
         </div>
+        <button onclick="applyFilters()">Apply Filters</button>
     </div>
-    <button onclick="applyFilters()">Apply Filters</button>
-</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
@@ -133,20 +117,15 @@
             }
         }
 
-        function toggleDropdown() {
-            const dropdown = document.getElementById('genreDropdownContainer');
-            dropdown.classList.toggle('open');
-        }
-
         function applyFilters() {
             const selectedGenres = Array.from(document.querySelectorAll('.genre-checkbox:checked')).map(checkbox => checkbox.value);
             const searchParams = new URLSearchParams(window.location.search);
             const query = searchParams.get('q') || '';
-            if (selectedGenres.length > 0) {
-                // Ensure the genres are included in the URL
-                const url = `search.html?q=${query}&genres=${selectedGenres.join(',')}`;
-                window.location.href = url;
-            }
+            const page = searchParams.get('page') || 1; // Get current page
+
+            // Ensure the genres are included in the URL
+            const url = `search.html?q=${query}&genres=${selectedGenres.join(',')}&page=${page}`;
+            window.location .href = url;
         }
     </script>
 </body>
