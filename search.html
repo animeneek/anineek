@@ -23,11 +23,11 @@
     </main>
 
     <script>
+        // Load the header HTML
         fetch("header.html")
             .then(response => response.text())
             .then(data => {
                 document.getElementById("header").innerHTML = data;
-                // Initialize search and random functionality after loading the header
                 initializeSearchAndRandom();
             });
 
@@ -44,7 +44,6 @@
 
         // Initialize the dropdown functionality in filter-menu
         function initializeDropdown() {
-            // Ensure that the dropdown button toggles the visibility of genres list
             const dropdownButton = document.querySelector('.filter-menu .dropdown button');
             dropdownButton.addEventListener('click', function() {
                 const dropdownContent = document.querySelector('.filter-menu .dropdown-content');
@@ -52,6 +51,7 @@
             });
         }
 
+        // Fetch genres and populate dropdown
         async function fetchGenres() {
             try {
                 const response = await fetch('https://api.jikan.moe/v4/genres/anime');
@@ -91,6 +91,7 @@
             }
         }
 
+        // Apply selected filters
         function applyFilters() {
             const selectedGenres = Array.from(document.querySelectorAll('.genre-checkbox:checked')).map(checkbox => checkbox.value);
             const searchParams = new URLSearchParams(window.location.search);
