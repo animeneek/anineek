@@ -36,8 +36,38 @@
             .then(response => response.text())
             .then(html => {
                 document.getElementById('filter-menu-container').innerHTML = html;
+                // After loading the filter menu, fetch genres
+                fetchGenres();
             })
             .catch(error => console.error('Error loading filter menu:', error));
+
+        async function fetchGenres() {
+            try {
+                const response = await fetch('https://api.jikan.moe/v4/genres/anime');
+                const data = await response.json();
+                const genres = data.data.sort((a, b) => a.name.localeCompare(b.name));
+                const genreDropdown = document.getElementById('genreDropdown');
+
+                genres.forEach(genre => {
+                    const option = document.createElement('option');
+                    option.value = genre.mal_id;
+                    option.textContent = genre.name;
+                    genreDropdown.appendChild(option);
+                });
+
+                // Check the genres in the URL and select them in the dropdown
+                const urlParams = new URLSearchParams(window.location.search);
+                const selectedGenres = urlParams.get('genres') ? urlParams.get('genres').split(',') : [];
+                selectedGenres.forEach(genreId => {
+                    const option = genreDropdown.querySelector(`option[value="${genreId}"]`);
+                    if (option) {
+                        option.selected = true;
+                    }
+                });
+            } catch (error) {
+                console.error("Error fetching genres:", error);
+            }
+        }
 
         // Fetch and display search results based on query parameters
         const urlParams = new URLSearchParams(window.location.search);
