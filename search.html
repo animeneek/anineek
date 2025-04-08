@@ -92,6 +92,11 @@
             const animeResults = document.getElementById('animeResults');
             animeResults.innerHTML = ''; // Clear previous results
 
+            if (data.data.length === 0) {
+                animeResults.innerHTML = 'No results found.';
+                return;
+            }
+
             data.data.forEach(anime => {
                 const animeItem = document.createElement('div');
                 animeItem.className = 'anime-item';
