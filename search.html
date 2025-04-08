@@ -24,15 +24,13 @@
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById("header").innerHTML = data;
-                    // Initialize search and random functionality after loading the header
-                    initializeSearchAndRandom();
                 });
 
             // Fetch and display search results based on query parameters
             const urlParams = new URLSearchParams(window.location.search);
-            const selectedGenres = urlParams.get('genres');
-            if (selectedGenres) {
-                searchAnime(selectedGenres.split(','));
+            const selectedGenre = urlParams.get('genres');
+            if (selectedGenre) {
+                searchAnime([selectedGenre]);
             }
         });
 
