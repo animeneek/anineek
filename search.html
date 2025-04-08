@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-    <title>Search Results - AniNeek</title>
+    <title>AniNeek - Search Results</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://kit.fontawesome.com/8e3f3e5f4e.js" crossorigin="anonymous"></script>
@@ -13,26 +13,38 @@
     <!-- Include Header -->
     <div id="header"></div>
 
-    <!-- Search Results Container -->
-    <div id="searchResultsContainer" class="search-results-container">
-        <div id="searchResults" class="search-results"></div>
-    </div>
+    <main>
+        <h1 id="searchTitle">Search Results</h1>
+        <div id="animeResults" class="grid-container">Loading...</div>
+        <div id="pagination"></div>
+    </main>
+
+    <!-- Include Filter Menu -->
+    <div id="filter-menu-container"></div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            fetch("header.html")
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("header").innerHTML = data;
-                });
+        fetch("header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header").innerHTML = data;
+                // Initialize search and random functionality after loading the header
+                initializeSearchAndRandom();
+            });
 
-            // Fetch and display search results based on query parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const selectedGenre = urlParams.get('genres');
-            if (selectedGenre) {
-                searchAnime([selectedGenre]);
-            }
-        });
+        // Load the filter menu HTML and inject it into the container
+        fetch('filter-menu.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('filter-menu-container').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading filter menu:', error));
+
+        // Fetch and display search results based on query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedGenres = urlParams.get('genres');
+        if (selectedGenres) {
+            searchAnime(selectedGenres.split(','));
+        }
 
         async function searchAnime(genres) {
             const query = ''; // Replace with actual search query if needed
@@ -47,8 +59,8 @@
         }
 
         function displaySearchResults(data) {
-            const searchResults = document.getElementById('searchResults');
-            searchResults.innerHTML = ''; // Clear previous results
+            const animeResults = document.getElementById('animeResults');
+            animeResults.innerHTML = ''; // Clear previous results
 
             data.data.forEach(anime => {
                 const animeItem = document.createElement('div');
@@ -70,14 +82,13 @@
                     </div>
                 `;
 
-                searchResults.appendChild(animeItem);
+                animeResults.appendChild(animeItem);
             });
         }
     </script>
 
+    <script src="search.js"></script>
     <script src="index.js"></script>
-    <script src="slider.js"></script>
-    <script src="tabs.js"></script>
     <script src="anilist-image-replacer.js"></script>
 
 </body>
