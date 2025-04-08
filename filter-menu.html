@@ -19,15 +19,37 @@
             font-size: 24px;
             margin-bottom: 10px;
         }
-        .filter-menu select {
+        .filter-menu .dropdown {
+            position: relative;
             margin-bottom: 10px;
+        }
+        .filter-menu .dropdown button {
+            width: 100%;
             padding: 10px;
             background: #333;
+            color: white;
             border: 1px solid #444;
             border-radius: 5px;
-            color: #fff;
-            height: 150px; /* Height for scrollable dropdown */
-            overflow-y: auto; /* Enable vertical scrolling */
+            text-align: left;
+            cursor: pointer;
+        }
+        .filter-menu .dropdown-content {
+            display: none;
+            position: absolute;
+            background: #333;
+            width: 100%;
+            border: 1px solid #444;
+            border-radius: 5px;
+            z-index: 1;
+            max-height: 150px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        .filter-menu .dropdown-content input {
+            margin-right: 10px;
+        }
+        .filter-menu .dropdown.open .dropdown-content {
+            display: block;
         }
         .filter-menu button {
             margin-top: 10px;
@@ -47,9 +69,12 @@
 <body>
     <div class="filter-menu">
         <h2>Filter by Genre</h2>
-        <select id="genreDropdown" multiple>
-            <!-- Genres will be populated here -->
-        </select>
+        <div class="dropdown" id="genreDropdownContainer">
+            <button onclick="toggleDropdown()">Select Genres</button>
+            <div class="dropdown-content" id="genreDropdown">
+                <!-- Genres will be populated here -->
+            </div>
+        </div>
         <button onclick="applyFilters()">Apply Filters</button>
     </div>
 
@@ -66,18 +91,34 @@
                 const genreDropdown = document.getElementById('genreDropdown');
 
                 genres.forEach(genre => {
-                    const option = document.createElement('option');
-                    option.value = genre.mal_id;
-                    option.textContent = genre.name;
-                    genreDropdown.appendChild(option);
+                    const label = document.createElement('label');
+                    label.className = 'genre-label';
+
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.value = genre.mal_id;
+                    checkbox.id = `genre-${genre.mal_id}`;
+                    checkbox.className = 'genre-checkbox';
+
+                    const span = document.createElement('span');
+                    span.textContent = genre.name;
+
+                    label.appendChild(checkbox);
+                    label.appendChild(span);
+                    genreDropdown.appendChild(label);
                 });
             } catch (error) {
                 console.error("Error fetching genres:", error);
             }
         }
 
+        function toggleDropdown() {
+            const dropdown = document.getElementById('genreDropdown');
+            dropdown.classList.toggle('open');
+        }
+
         function applyFilters() {
-            const selectedGenres = Array.from(document.getElementById('genreDropdown').selectedOptions).map(option => option.value);
+            const selectedGenres = Array.from(document.querySelectorAll('.genre-checkbox:checked')).map(checkbox => checkbox.value);
             const searchParams = new URLSearchParams(window.location.search);
             const query = searchParams.get('q') || '';
             if (selectedGenres.length > 0) {
